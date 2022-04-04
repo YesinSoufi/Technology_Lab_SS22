@@ -1,8 +1,7 @@
 # Technology_Lab_SS22
-# Erster Push
-# Zweiter Push
-# Dritter Push
-# Vierter Push
-# Fünfter Push
-# Sechster Push
-# Siebter Push
+
+Elena Müller 42616
+Osman Kaplan 42581
+Niklas Öxle 42614
+Sascha Lehmann 42599
+Yesin Soufi 42612
