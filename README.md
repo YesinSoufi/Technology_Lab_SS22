@@ -10,10 +10,12 @@
 
  <ul>
     <li>Personas and User Story</li>
-    ![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Persona_LisaSakob.jpg)
     <li>Scenarios and Glossar</li>
     <li>Components diagram</li>
   <li>Machine learning concept</li>
   <li>Training data</li>
   
 </ul>
+
+<h3>Personas</h3>
+![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Persona_LisaSakob.jpg)
