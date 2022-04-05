@@ -5,6 +5,7 @@
 <p>Niklas Öxle 42614 </p>
 <p>Sascha Lehmann 42599 </p>
 <p>Yesin Soufi 42612 </p>
+<p>Jakob Schaal 42613 </p>
 
 <h2> Milestone 1 </h2>
 
