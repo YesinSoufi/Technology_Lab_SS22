@@ -20,10 +20,10 @@
 <h3>Personas</h3>
 
 * Lisa Sakob
-![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/assets/Persona_LisaSakob.jpg)
+![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona2.pdf)
 
 * Giovanni Kosman
-![Persona Giovanni Kosman](https://github.com/YesinSoufi/Technology_Lab_SS22/assets/Persona_Giovanni_Kosman.pdf)
+![Persona Giovanni Kosman](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_Giovanni_Kosman.pdf)
 
 * Freddy Tehmann
 
