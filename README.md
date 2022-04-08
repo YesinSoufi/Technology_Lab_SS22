@@ -20,7 +20,7 @@
 
 <h3>Personas</h3>
 
-* ![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_LisaSakob.pdf)
+* ![Persona Lisa Sakob](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_LisaSakob.pdf)
 
 * ![Persona Giovanni Kosman](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_Giovanni_Kosman.pdf)
 
