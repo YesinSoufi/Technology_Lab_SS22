@@ -48,17 +48,22 @@ def extract_features(signal):
 
 # %%
 audio_features = np.array([extract_features(x) for x in audio])
+
 # %%
 print(audio_features[0])
+
 # %%
 plt.figure(figsize=(14, 5))
 plt.hist(audio_features[:,0], color='b', range=(0, 0.2), alpha=0.5, bins=20)
 plt.legend('audio')
 plt.xlabel('Zero Crossing Rate')
 plt.ylabel('Count')
+
 # %%
 plt.figure(figsize=(14, 5))
 plt.hist(audio_features[:,1], color='b', range=(0, 4000), bins=30, alpha=0.6)
 plt.legend('audio')
 plt.xlabel('Spectral Centroid (frequency bin)')
 plt.ylabel('Count')
+
+# %%
