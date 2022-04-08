@@ -19,9 +19,11 @@ data = []
 for file in Path('sample_music').glob('*.mp3'):
     data.append([os.path.basename(file), file])
 
-df = pd.DataFrame(data, columns=['name', 'filePath'])
-
+df = pd.DataFrame(data, columns=['audio_name', 'filePath'])
+df['ID'] = df.index+1
+df = df[['ID','audio_name', 'filePath']]
 df
+
 # %%
 
 test_audio = df.iloc[0,1]
@@ -78,7 +80,7 @@ for file in df['filePath']:
     spec_bw = librosa.feature.spectral_bandwidth(y=y, sr=sr2)
     rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr2)
     zcr = librosa.feature.zero_crossing_rate(y)
-    #mfcc = librosa.feature.mfcc(y=y, sr=sr)
+    #mfcc = librosa.feature.mfcc(y=y, sr=sr2)
 
     features_data.append([np.mean(rmse),np.mean(chroma_stft), np.mean(spec_cent),np.mean(spec_bw),np.mean(rolloff), np.mean(zcr)])
 
