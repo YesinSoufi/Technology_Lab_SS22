@@ -20,10 +20,10 @@
 
 <h3>Personas</h3>
 
-* ![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona2.pdf)
+* ![Persona Lisa Sakob](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_LisaSakob.pdf)
 
 * ![Persona Giovanni Kosman](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_Giovanni_Kosman.pdf)
 
-* ![Freddy Tehmann](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_FreddyTehmann.pdf)
+* ![Persona Freddy Tehmann](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_FreddyTehmann.pdf)
 
 <h3>User Storys</h3>
