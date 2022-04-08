@@ -19,4 +19,16 @@
 </ul>
 
 <h3>Personas</h3>
-![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Persona_LisaSakob.jpg)
+
+* ![Persona Lisa Sakob](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_LisaSakob.pdf)
+
+* ![Persona Giovanni Kosman](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_Giovanni_Kosman.pdf)
+
+* ![Persona Freddy Tehmann](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_FreddyTehmann.pdf)
+
+<h3>User Storys</h3>
+
+
+
+<h3>Audio Source</h3>
+<p><a href="https://drive.google.com/drive/folders/1jtSzfG69MFptyQGHKbSkFLnSg_il9D50">Link for Audiofiles</a></p>
