@@ -1,27 +1,13 @@
 # %%
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
-import os #C
+import os
 
 from glob import glob
-
-import librosa
-import librosa.display
 import IPython.display as ipd
 
-
 from pydub import AudioSegment
 from pydub.utils import make_chunks
-
-from pydub import AudioSegment 
-from pydub.utils import make_chunks 
-
-from pydub import AudioSegment
-from pydub.utils import make_chunks
-from pydub import AudioSegment 
-from pydub.utils import make_chunks 
 
 import shutil
 import random
