@@ -11,7 +11,7 @@ Aufgabenverteilung: [Kanban-Board zum Projekt](https://github.com/YesinSoufi/Tec
 
 <h2>Projektbeschreibung</h2>
 
-Im Rahmen des Projekts Technology Lab wird ein System entwickelt, das . Das Projektvorgehen ist in drei Schritte gegliedert:
+Im Rahmen des Projekts Technology Lab wird ein System entwickelt, das mithilfe eines neuronalen Netzwerkes anhand unbekannter Samples einen Musikstream generiert . Das Projektvorgehen ist in drei Schritte gegliedert:
 
 1. Maschinelles Lernen von Sequenzen
     * Herstellung von Trainingsdaten durch Zerlegung von Musikstücken in Samples
@@ -41,5 +41,5 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
 
   * Scenarios and Glossar
   * Components diagram
-  * Machine learning concept
+  * [Machine learning Konzept](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/MachineLearningKonzept.pdf)
   * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
