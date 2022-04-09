@@ -7,16 +7,15 @@
 <p>Yesin Soufi 42612 </p>
 <p>Jakob Schaal 42613 </p>
 
-<h2> Milestone 1 </h2>
+Aufgabenverteilung: [Kanban-Board zum Projekt](https://github.com/YesinSoufi/Technology_Lab_SS22/projects/2)
 
- <ul>
-    <li>Personas and User Story</li>
-    <li>Scenarios and Glossar</li>
-    <li>Components diagram</li>
-  <li>Machine learning concept</li>
-  <li>Training data</li>
-  
-</ul>
 
-<h3>Personas</h3>
-![Persona Lisa Sakub](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Persona_LisaSakob.jpg)
+<h2> Meilenstein 1 </h2>
+
+  * [Personas](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Personas.md)
+  * [User Stories](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/UserStories.md)
+  * Scenarios and Glossar
+  * Components diagram
+  * Machine learning concept
+  * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
+
