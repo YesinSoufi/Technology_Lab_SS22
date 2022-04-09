@@ -34,7 +34,6 @@ def createSampleDF(audioPath):
     df_dataSet = pd.DataFrame(data, columns= ['audio_name', 'filePath'])
     df_dataSet['ID'] = df_dataSet.index+1
     df_dataSet = df_dataSet[['ID','audio_name','filePath']]
-    df_dataSet = sort_Dataframe(df_dataSet)
     return df_dataSet
 
 def createSamples(myAudioPath,savePath, sampleLength, overlap = 0):

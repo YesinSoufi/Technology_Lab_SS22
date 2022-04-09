@@ -12,7 +12,7 @@ def extract_features(df_raw_dataset):
     features_data = []
     count = 1
     for audioFile in df_raw_dataset['filePath']:
-        print('sample-file nr.: ' + str(count))
+        print('sample nr.: ' + str(count))
         features_data.append(get_features(audioFile))
         count = count + 1
 
