@@ -7,28 +7,15 @@
 <p>Yesin Soufi 42612 </p>
 <p>Jakob Schaal 42613 </p>
 
-<h2> Milestone 1 </h2>
-
- <ul>
-    <li>Personas and User Story</li>
-    <li>Scenarios and Glossar</li>
-    <li>Components diagram</li>
-  <li>Machine learning concept</li>
-  <li>Training data</li>
-  
-</ul>
-
-<h3>Personas</h3>
-
-* ![Persona Lisa Sakob](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_LisaSakob.pdf)
-
-* ![Persona Giovanni Kosman](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_Giovanni_Kosman.pdf)
-
-* ![Persona Freddy Tehmann](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Persona_FreddyTehmann.pdf)
-
-<h3>User Storys</h3>
+Aufgabenverteilung: [Kanban-Board zum Projekt](https://github.com/YesinSoufi/Technology_Lab_SS22/projects/2)
 
 
+<h2> Meilenstein 1 </h2>
 
-<h3>Audio Source</h3>
-<p><a href="https://drive.google.com/drive/folders/1jtSzfG69MFptyQGHKbSkFLnSg_il9D50">Link for Audiofiles</a></p>
+  * [Personas](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Personas.md)
+  * [User Stories](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/UserStories.md)
+  * Scenarios and Glossar
+  * Components diagram
+  * Machine learning concept
+  * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
+
