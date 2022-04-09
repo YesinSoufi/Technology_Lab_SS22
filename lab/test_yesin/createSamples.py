@@ -50,7 +50,7 @@ def createSampleDF(audioPath):
     df_dataSet = pd.DataFrame(data, columns= ['audio_name', 'filePath'])
     df_dataSet['ID'] = df_dataSet.index+1
     df_dataSet = df_dataSet[['ID','audio_name','filePath']]
-    df_dataSet.sort_values(by=['audio_name'], ascending=False, inplace=True)
+    df_dataSet.sort_values(by=['audio_name'],inplace=True)
     #df_dataSet['audio_name'].sort_values()
     return df_dataSet
 
