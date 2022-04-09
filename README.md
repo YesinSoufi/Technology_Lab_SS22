@@ -24,6 +24,7 @@ Im Fokus des Projekts steht neben Entwicklung eines lauffähigen Prototyps v.a. 
 
 <h3>Forschungsfragen:</h3> 
 Ziel des Projekts ist die Beantwortung der folglich definierten Forschungsfragen. 
+
    * Lässt sich ein „hörbarer“ (d.h. kaum von einem manuell gemixten Set unterscheidbarer) Stream durch das Zerschneiden und anschließende Resampling von Tracks auf Basis des Maschinellen Lernens erzeugen? 
    * Eignen sich gleichlange Samples oder stochastisch gewählte Samples besser als Datengrundlage? Wie lange ist eine optimale Sampledauer?
    * Wie ähnlich müssen sich die Ursprungstracks bzgl. Stimmung, Genre etc. sein? 
