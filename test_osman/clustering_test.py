@@ -3,10 +3,7 @@ import numpy, scipy, matplotlib.pyplot as plt, sklearn, librosa.display, mir_eva
 plt.rcParams['figure.figsize'] = (14, 4)
 
 # %%
-
 y,sr = librosa.load('test_audio/Metre_Lite.mp3')
-
-
 
 # %%
 print(sr)
@@ -53,14 +50,15 @@ plt.ylabel('Spectral Centroid (scaled)')
 
 # %%
 
-
-model = sklearn.cluster.KMeans(n_clusters=2)
+model = sklearn.cluster.KMeans(n_clusters=4)
 labels = model.fit_predict(features_scaled)
 print (labels)
 # %%
 
 plt.scatter(features_scaled[labels==0,0], features_scaled[labels==0,1], c='b')
 plt.scatter(features_scaled[labels==1,0], features_scaled[labels==1,1], c='r')
+plt.scatter(features_scaled[labels==2,0], features_scaled[labels==2,1], c='g')
+plt.scatter(features_scaled[labels==3,0], features_scaled[labels==3,1], c='y')
 plt.xlabel('Zero Crossing Rate (scaled)')
 plt.ylabel('Energy (scaled)')
 plt.legend(('Class 0', 'Class 1'))
