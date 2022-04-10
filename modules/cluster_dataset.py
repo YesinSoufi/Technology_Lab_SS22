@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import sklearn
 import librosa 
 import IPython.display
+import random
 
 plt.rcParams['figure.figsize'] = (20, 20)
 
@@ -18,7 +19,7 @@ def cluster_data(df_unlabeled_dataset, cluster : int):
 
     #plot
     #plot_features(feature1=4, feature2=5, norm_features=norm_featureArray)
-    plot_cluster(norm_features=norm_featureArray, labels=df_dataset['label'])
+    plot_cluster(norm_features=norm_featureArray, labels=df_dataset['label'], cluster=cluster)
 
     return df_dataset
 
@@ -78,16 +79,26 @@ def affinityPropagation_cluster(norm_features):
 #plot labeled data
 #choose two features to validate 
 #add or remove lines to increase/ decrease classes
-def plot_cluster(norm_features, labels): 
+def plot_cluster(norm_features, labels, cluster): 
     feature1 = 0
     feature2 = 1
 
-    plt.scatter(norm_features[labels==0,feature1], norm_features[labels==0,feature2], c='b')
-    plt.scatter(norm_features[labels==1,feature1], norm_features[labels==1,feature2], c='r')
-    plt.scatter(norm_features[labels==2,feature1], norm_features[labels==2,feature2], c='y')
+    label = 0
+    for i in range(1,cluster):
+        r = random.randint(0, 200)
+        b = random.randint(0, 200)
+        g = random.randint(0, 200)
+        color = (r, g, b)
+        plt.scatter(norm_features[labels==label,feature1], norm_features[labels==label,feature2], c=color)
+        label = label+1
+
+
+    #plt.scatter(norm_features[labels==0,feature1], norm_features[labels==0,feature2], c='b')
+    #plt.scatter(norm_features[labels==1,feature1], norm_features[labels==1,feature2], c='r')
+    #plt.scatter(norm_features[labels==2,feature1], norm_features[labels==2,feature2], c='y')
     #plt.scatter(norm_features[labels==3,feature1], norm_features[labels==3,feature2], c='g')
     #plt.scatter(norm_features[labels==4,feature1], norm_features[labels==4,feature2], c='c')
-    #plt.scatter(norm_features[labels==5,feature1], norm_features[labels==5,feature2], c='b')
+    #plt.scatter(norm_features[labels==5,feature1], norm_features[labels==5,feature2], c='m')
 
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
