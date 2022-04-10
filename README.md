@@ -35,11 +35,12 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
 
   * [Personas](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Personas.md)
   * [User Stories](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/UserStories.md)
+
  
 
 <h4>Systementwurf:</h4> 
 
   * Scenarios and Glossar
-  * Components diagram
+ * [ComponentDiagram](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/ComponentDiagram.md)
   * [Machine learning Konzept](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/MachineLearningKonzept.pdf)
   * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)

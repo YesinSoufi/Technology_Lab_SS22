@@ -9,8 +9,8 @@ import pandas as pd
 # variables
 toCutAudioPath = '../AudioData/AudioData.wav'
 sampleSavePath = '../AudioData/AudioDataSamples/'
-sampleLength = 0.05
-cluster = 3
+sampleLength = 0.03
+cluster = 6
 
 # %%
 # create samples from cutting one long track
@@ -31,3 +31,5 @@ df_load_features = pd.read_csv('../dataset_csv/dataset_features_' + str(sampleLe
 df_dataset_labels = cluster_dataset.cluster_data(df_load_features, cluster = cluster)
 df_dataset_labels.to_csv('../dataset_csv/dataset_labels_' + str(sampleLength) + '_seconds_' + str(cluster) + '_cluster.csv', index=False)
 df_dataset_labels
+
+# %%
