@@ -28,9 +28,13 @@ df_dataset_features
 
 # %%
 # cluster features and append label column
-cluster = 6
+cluster = 3
 
-df_load_features = pd.read_csv('process_exports/dataset_features.csv', index_col=[0])
+#df_load_features = pd.read_csv('process_exports/dataset_features.csv', index_col=[0])
+df_load_features = pd.read_csv(r'C:\Users\sasch\Documents\GitHub\Technology_Lab_SS22\lab\test_sascha\process_exports\dataset_features.csv', index_col=[0])
+
 df_dataset_labels = cluster_dataset.cluster_data(df_load_features, cluster = cluster)
-df_dataset_labels.to_csv('process_exports/dataset_labels.csv')
-df_dataset_labels
+#df_dataset_labels.to_csv('process_exports/dataset_labels.csv')
+#df_dataset_labels
+
+# %%

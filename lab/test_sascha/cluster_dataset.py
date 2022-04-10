@@ -17,7 +17,7 @@ def cluster_data(df_unlabeled_dataset, cluster : int):
     df_dataset['label'] = kmean_cluster(norm_featureArray, cluster)
 
     #plot
-    plot_features(feature1=4, feature2=5, norm_features=norm_featureArray)
+    plot_features(feature1=0, feature2=1, norm_features=norm_featureArray)
     plot_cluster(norm_features=norm_featureArray, labels=df_dataset['label'])
 
     return df_dataset
@@ -26,9 +26,8 @@ def cluster_data(df_unlabeled_dataset, cluster : int):
 #create 2D numpy.array with all features from all samples
 #only feature data, no audio data
 def create_featureArray(df_dataset_unlabeled):
-    featureArray = np.array(df_dataset_unlabeled.iloc[:, 3:9])  
-    #only for sample_features_df.csv
-    #featureArray = np.array(df_dataset_unlabeled.iloc[:, 4:10])
+    #featureArray = np.array(df_dataset_unlabeled.iloc[:, 3:9])
+    featureArray = np.array(df_dataset_unlabeled.iloc[:, 3:5])
     print('featureArray: ' + str(featureArray))
     return featureArray
 
@@ -70,7 +69,7 @@ def kmean_cluster(norm_features, cluster : int):
 def affinityPropagation_cluster(norm_features):
     model = sklearn.cluster.AffinityPropagation()
     labels = model.fit_predict(norm_features)
-    #print(labels)
+    print('labels: ' + str(labels))
     return labels
 
 # %%
@@ -81,12 +80,12 @@ def plot_cluster(norm_features, labels):
 
     plt.scatter(norm_features[labels==0,0], norm_features[labels==0,1], c='b')
     plt.scatter(norm_features[labels==1,0], norm_features[labels==1,1], c='r')
-    plt.scatter(norm_features[labels==2,0], norm_features[labels==2,1], c='y')
-    plt.scatter(norm_features[labels==3,0], norm_features[labels==3,1], c='g')
-    plt.scatter(norm_features[labels==4,0], norm_features[labels==4,1], c='o')
-    plt.scatter(norm_features[labels==5,0], norm_features[labels==5,1], c='b')
+    #plt.scatter(norm_features[labels==2,0], norm_features[labels==2,1], c='y')
+    #plt.scatter(norm_features[labels==3,0], norm_features[labels==3,1], c='g')
+    #plt.scatter(norm_features[labels==4,0], norm_features[labels==4,1], c='o')
+    #plt.scatter(norm_features[labels==5,0], norm_features[labels==5,1], c='b')
 
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
-    plt.legend(('Class 0', 'Class 1', 'Class 2'))
+    plt.legend(('Class 0', 'Class 1'))
 
