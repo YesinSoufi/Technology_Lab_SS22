@@ -9,8 +9,8 @@ import pandas as pd
 # variables
 toCutAudioPath = '../AudioData/AudioData.wav'
 sampleSavePath = '../AudioData/AudioDataSamples/'
-sampleLength = 0.03
-cluster = 6
+sampleLength = 0.05
+cluster = 10
 
 # %%
 # create samples from cutting one long track
