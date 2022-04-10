@@ -61,3 +61,8 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
  * glob
  * pydub
  * pathlib
+
+
+<h2>Wissenschaftliche Substanz</h2>
+
+musicinformationretrieval.com
