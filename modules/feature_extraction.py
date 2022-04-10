@@ -10,8 +10,11 @@ import librosa.display
 def extract_features(df_raw_dataset):
     features = ['filePath', 'rmse', 'chroma_stft', 'spec_cent', 'spec_bw', 'rolloff', 'zcr', 'mfcc']
     features_data = []
+    count = 1
     for audioFile in df_raw_dataset['filePath']:
+        print('sample-file nr.: ' + str(count))
         features_data.append(get_features(audioFile))
+        count = count + 1
 
     df_song_features = pd.DataFrame(features_data, columns=features)
     df_features_dataset = df_raw_dataset.merge(df_song_features, on='filePath')
