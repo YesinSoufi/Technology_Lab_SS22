@@ -65,10 +65,10 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
 
 <h2>Wissenschaftliche Basis</h2>
 
-musicinformationretrieval.com
-https://www.statworx.com/content-hub/blog/einfuehrung-tensorflow/
-http://www.deeplearningbook.org
-https://openai.com/blog/jukebox/
-https://magenta.tensorflow.org/
-https://github.com/librosa/librosa
+* musicinformationretrieval.com
+* https://www.statworx.com/content-hub/blog/einfuehrung-tensorflow/
+* http://www.deeplearningbook.org
+* https://openai.com/blog/jukebox/
+* https://magenta.tensorflow.org/
+* https://github.com/librosa/librosa
 
