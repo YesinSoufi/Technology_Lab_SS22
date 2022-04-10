@@ -83,13 +83,15 @@ def plot_cluster(norm_features, labels, cluster):
     feature1 = 0
     feature2 = 1
 
+    print('cluster: ' + str(cluster))
+
     label = 0
     for i in range(1,cluster):
-        r = random.randint(0, 200)
-        b = random.randint(0, 200)
-        g = random.randint(0, 200)
+        r = random.random()
+        b = random.random()
+        g = random.random()
         color = (r, g, b)
-        plt.scatter(norm_features[labels==label,feature1], norm_features[labels==label,feature2], c=color)
+        plt.scatter(norm_features[labels==label,feature1], norm_features[labels==label,feature2], color=color)
         label = label+1
 
 
@@ -102,5 +104,5 @@ def plot_cluster(norm_features, labels, cluster):
 
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
-    plt.legend(('Class 0', 'Class 1', 'Class 2'))
+    #plt.legend(('Class 0', 'Class 1', 'Class 2'))
 

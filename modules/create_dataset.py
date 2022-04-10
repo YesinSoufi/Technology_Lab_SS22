@@ -1,5 +1,4 @@
 # %%
-from random import sample
 import createSamples
 import feature_extraction
 import cluster_dataset
@@ -10,7 +9,7 @@ import pandas as pd
 toCutAudioPath = '../AudioData/AudioData.wav'
 sampleSavePath = '../AudioData/AudioDataSamples/'
 sampleLength = 0.05
-cluster = 10
+cluster = 200
 
 # %%
 # create samples from cutting one long track
