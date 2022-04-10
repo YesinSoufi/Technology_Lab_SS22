@@ -63,6 +63,12 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
  * pathlib
 
 
-<h2>Wissenschaftliche Substanz</h2>
+<h2>Wissenschaftliche Basis</h2>
 
 musicinformationretrieval.com
+https://www.statworx.com/content-hub/blog/einfuehrung-tensorflow/
+http://www.deeplearningbook.org
+https://openai.com/blog/jukebox/
+https://magenta.tensorflow.org/
+https://github.com/librosa/librosa
+
