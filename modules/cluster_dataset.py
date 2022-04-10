@@ -85,9 +85,9 @@ def plot_cluster(norm_features, labels):
     plt.scatter(norm_features[labels==0,feature1], norm_features[labels==0,feature2], c='b')
     plt.scatter(norm_features[labels==1,feature1], norm_features[labels==1,feature2], c='r')
     plt.scatter(norm_features[labels==2,feature1], norm_features[labels==2,feature2], c='y')
-    plt.scatter(norm_features[labels==3,feature1], norm_features[labels==3,feature2], c='g')
-    plt.scatter(norm_features[labels==4,feature1], norm_features[labels==4,feature2], c='c')
-    plt.scatter(norm_features[labels==5,feature1], norm_features[labels==5,feature2], c='b')
+    #plt.scatter(norm_features[labels==3,feature1], norm_features[labels==3,feature2], c='g')
+    #plt.scatter(norm_features[labels==4,feature1], norm_features[labels==4,feature2], c='c')
+    #plt.scatter(norm_features[labels==5,feature1], norm_features[labels==5,feature2], c='b')
 
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
