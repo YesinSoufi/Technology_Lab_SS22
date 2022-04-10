@@ -11,9 +11,9 @@
 
 <h2>Aufbau der Trainingsdaten</h2>
 
-Da als erste Challenge die erstellung von geeigneten Trainingsdaten ist, müssen im ersten Schritt Audio-Samples erstellt werden. Somit können keine im Internet zur Verfügung stehenden Datansätze genutzt werden.
+Da als erste Challenge die Erstellung von geeigneten Trainingsdaten ist, müssen im ersten Schritt Audio-Samples erstellt werden. Somit können keine im Internet zur Verfügung stehenden Datansätze genutzt werden.
 Aus diesem Grund ist besteht die Herausforderung darin, die optimale Länger von Samples herauszufinden, sowie das Klassifizieren der Samples.
-Zur Klassifizierung der Daten haben wir uns für Unsupervised Learning durch das Kmeans-Clustering entschiedne. Durch dieses Verfahren werden Cluster gebildet, welche aus Audio-Samples, die sich ähnlich sind, gebildet. Alle Audio-Samples die zum selben Cluster gehören, erhalten auch die selbe Kennzeichnung (Label).
+Zur Klassifizierung der Daten haben wir uns für Unsupervised Learning durch das Kmeans-Clustering entschieden. Durch dieses Verfahren werden Cluster gebildet, welche aus Audio-Samples, die sich ähnlich sind, gebildet. Alle Audio-Samples die zum selben Cluster gehören, erhalten auch die selbe Kennzeichnung (Label).
   
 Damit wir unsere Samples klassifizieren konnten, mussten wir verschieden Audio-Features ermitteln. Der umgesetzte Prozess zur Erstellung unserer Trainingsdaten ist in drei Schritte aufgeteil:
   
@@ -32,6 +32,7 @@ Der Aufbau unserer Datasets sieht wie folgt aus:
 
 ![grafik](https://user-images.githubusercontent.com/99210485/162636754-f01fefbe-1680-4a5b-9e00-5efc8d99137b.png)
 
+Durch das erstellen von mehrern DataSets erlangen wir einen Overlap der Samples und können somit in Challenge 2 testen ob dies sinvoll ist.
 
 Falls wir im laufe der Challenge 2&3 festellen, dass wir unsere Daten anpassen müssen, können wir das innerhalb unseres Programmcodes durch das verändern von zwei Parametern schnell erledigen.
   
