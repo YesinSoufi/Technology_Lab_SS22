@@ -44,3 +44,20 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
  * [ComponentDiagram](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/ComponentDiagram.md)
   * [Machine learning Konzept](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/MachineLearningKonzept.pdf)
   * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
+
+<h5>Aktuell benutzte Libraries</h5> 
+
+ * pandas
+ * random
+ * createSamples
+ * feature_extraction
+ * cluster_dataset
+ * numpy
+ * scipy
+ * matplotlib.pyplot
+ * sklearn
+ * librosa
+ * IPython
+ * glob
+ * pydub
+ * pathlib
