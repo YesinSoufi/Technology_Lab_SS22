@@ -1,20 +1,16 @@
 # %%
 from random import sample
-from modules import cluster_dataset, feature_extraction, createSamples
-import os
+import createSamples
+import feature_extraction
+import cluster_dataset
 import pandas as pd
-import sys
 
 # %%
 # variables
-toCutAudioPath = os.path.abspath('../AudioData/AudioData.wav')
+toCutAudioPath = '../AudioData/AudioData.wav'
 sampleSavePath = '../AudioData/AudioDataSamples/'
-sampleLength = 0.02
-cluster = 3
-if not os.path.exists(toCutAudioPath):
-    print("Fix code")
-if not os.path.exists(sampleSavePath):
-    print("Fix code")
+sampleLength = 0.05
+cluster = 10
 
 # %%
 # create samples from cutting one long track
@@ -35,3 +31,5 @@ df_load_features = pd.read_csv('../dataset_csv/dataset_features_' + str(sampleLe
 df_dataset_labels = cluster_dataset.cluster_data(df_load_features, cluster = cluster)
 df_dataset_labels.to_csv('../dataset_csv/dataset_labels_' + str(sampleLength) + '_seconds_' + str(cluster) + '_cluster.csv', index=False)
 df_dataset_labels
+
+# %%

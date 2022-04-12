@@ -35,11 +35,40 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
 
   * [Personas](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Personas.md)
   * [User Stories](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/UserStories.md)
+
  
 
 <h4>Systementwurf:</h4> 
 
   * Scenarios and Glossar
-  * Components diagram
+ * [ComponentDiagram](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/ComponentDiagram.md)
   * [Machine learning Konzept](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/MachineLearningKonzept.pdf)
   * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
+
+<h5>Aktuell benutzte Libraries</h5> 
+
+ * pandas
+ * random
+ * createSamples
+ * feature_extraction
+ * cluster_dataset
+ * numpy
+ * scipy
+ * matplotlib.pyplot
+ * sklearn
+ * librosa
+ * IPython
+ * glob
+ * pydub
+ * pathlib
+
+
+<h2>Wissenschaftliche Basis</h2>
+
+* musicinformationretrieval.com
+* https://www.statworx.com/content-hub/blog/einfuehrung-tensorflow/
+* http://www.deeplearningbook.org
+* https://openai.com/blog/jukebox/
+* https://magenta.tensorflow.org/
+* https://github.com/librosa/librosa
+
