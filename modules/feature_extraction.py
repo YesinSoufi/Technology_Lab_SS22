@@ -5,8 +5,8 @@ import librosa
 import librosa.display
 
 
-#expecting dataframe with unlabeled samples dataset
-#returns dataframe with added audio features
+# expecting dataframe with unlabeled samples dataset
+# returns dataframe with added audio features
 def extract_features(df_raw_dataset):
     features = ['filePath', 'rmse', 'chroma_stft', 'spec_cent', 'spec_bw', 'rolloff', 'zcr', 'mfcc']
     features_data = []
@@ -24,9 +24,10 @@ def extract_features(df_raw_dataset):
 
     return df_features_dataset
 
-#load audio-file 
-#calculate features
-#return feature array
+
+# load audio-file
+# calculate features
+# return feature array
 def get_features(filePath):
     features_data = []
     y, sr = librosa.load(filePath)
@@ -39,4 +40,5 @@ def get_features(filePath):
     zcr = librosa.feature.zero_crossing_rate(y)
     mfcc = librosa.feature.mfcc(y=y, sr=sr)
 
-    return [filePath, np.mean(rmse),np.mean(chroma_stft), np.mean(spec_cent),np.mean(spec_bw),np.mean(rolloff), np.mean(zcr), np.mean(mfcc)]
+    return [filePath, np.mean(rmse), np.mean(chroma_stft), np.mean(spec_cent), np.mean(spec_bw), np.mean(rolloff),
+            np.mean(zcr), np.mean(mfcc)]
