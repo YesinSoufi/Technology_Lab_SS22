@@ -1,9 +1,10 @@
 # %%
 from random import sample
-import createSamples
-import feature_extraction
-import cluster_dataset
+#import createSamples
+#import feature_extraction
+#import cluster_dataset
 import pandas as pd
+from modules import createSamples, feature_extraction, cluster_dataset
 
 # %%
 # variables
