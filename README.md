@@ -44,3 +44,10 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
  * [ComponentDiagram](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/ComponentDiagram.md)
   * [Machine learning Konzept](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/MachineLearningKonzept.pdf)
   * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
+
+
+
+
+
+
+
