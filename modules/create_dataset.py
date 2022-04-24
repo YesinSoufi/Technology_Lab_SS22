@@ -8,7 +8,7 @@ import pandas as pd
 # variables
 toCutAudioPath = '../AudioData/AudioData.wav'
 sampleSavePath = '../AudioData/AudioDataSamples/'
-sampleLength = 0.05
+sampleLength = 4
 cluster = 200
 
 # %%
