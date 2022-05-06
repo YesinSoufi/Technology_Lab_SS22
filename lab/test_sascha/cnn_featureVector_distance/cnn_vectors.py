@@ -3,6 +3,7 @@ import createSamples
 import createSpectrograms
 import pandas as pd
 import librosa
+import createBatchDataset
 
 #%%
 myAudioPath = 'Audio/Metre-Slide.wav'
@@ -30,4 +31,17 @@ for row in df_samples.itertuples():
 
 
 # %%
+import createBatchDataset
+import tensorflow_datasets as tfds
 
+specPath_start = 'Audio/Spectrograms/Start'
+specPath_end = 'Audio/Spectrograms/End'
+
+df_start = tfds.as_dataframe(createBatchDataset.loadSpectograms(specPath_start))
+df_end = tfds.as_dataframe(createBatchDataset.loadSpectograms(specPath_end))
+
+#%%
+df_start.to_csv('Audio/CSV/Tensorflo_Dataset_Spectograms_Start1.csv')
+df_end.to_csv('Audio(CSV/Tensorflow_Dataset_Spectograms_End1.csv')
+
+# %%

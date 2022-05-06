@@ -6,12 +6,6 @@ import tensorflow as tf
 import os
 import cv2
 
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from sklearn.model_selection import train_test_split
-from tensorflow.keras import layers, losses
-from tensorflow.keras.datasets import fashion_mnist
-from tensorflow.keras.models import Model
-
 
 # %%
 specfilelist=os.listdir('Audio/Spectrograms/Start')
@@ -79,7 +73,7 @@ autoencoder.fit(train_start, train_start,
                 shuffle=True,
                 validation_data=(validate_start, validate_start))
 
-# %%
+#%%
 
 batch_size = 10
 img_height = 223
@@ -87,12 +81,31 @@ img_width = 217
 
 
 val_ds = tf.keras.utils.image_dataset_from_directory(
-  'Audio/Spectrograms/Start/',
-  validation_split=0.2,
-  subset="validation",
+  'C:/Users/Sascha/Documents/GitHub/Technology_Lab_SS22/lab/test_sascha/cnn_featureVector_distance/Audio/Spectrograms/Start',
+  #validation_split=0.2,
+  #subset="validation",
+  label_mode=None,
   seed=123,
   image_size=(img_height, img_width),
   batch_size=batch_size)
 
+val_ds
+
+#%%
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 10))
+for images in val_ds.take(1):
+  for i in range(9):
+    ax = plt.subplot(3, 3, i + 1)
+    plt.imshow(images[i].numpy().astype("uint8"))
+    plt.axis("off")
+
+# %%
+for image_batch in val_ds:
+  print(image_batch.shape)
+
+
+# %%
 val_ds
 # %%

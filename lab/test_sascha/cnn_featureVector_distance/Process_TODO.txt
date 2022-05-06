@@ -2,9 +2,9 @@
 - Cut new track into 4 second samples and save path into csv
 - Create start and end spectrograms: Names: "ST1 .. STn", "EN1 .. ENn"
 - Save spectrograms into two folder: "start", "end"
-
 - Create Tensorflow Datasets from Spectrograms
-- Build CNN without dense layers, only save feature vectors for each start and end spectrogram
+
+- Build CNN without dense layers, only save feature vectors for each start and end spectrogram  
 - Build Distance ANN or Algorithm to compare start and end vectors
 - Start and end pairs with min distanc will be put together 
 - build original track
