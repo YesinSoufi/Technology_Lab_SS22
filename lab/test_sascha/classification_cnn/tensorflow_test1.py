@@ -13,13 +13,16 @@ import librosa
 df_arrays = []
 for row in df_samples.index:
     sample, sr = librosa.load(df_samples['filePath'][row], mono=True)
-    df_arrays.append(sample)
+    df_arrays.append(sample, 5)
 
-df_arrays
 
 #%%
+import numpy as np
 sample, sr = librosa.load(df_samples.iloc[1,2], mono=True, )
-type(sample)
+sample = np.array(sample, [5])
+sample
+
+
 
 
 # %%
