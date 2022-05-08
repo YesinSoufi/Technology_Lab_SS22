@@ -1,1 +1,8 @@
 C:\Users\Sascha\Music\TechoLab22
+
+Labels  = 
+
+1 - Jazz
+2 - Lofi
+3 - Electronic
+4 - Classical
