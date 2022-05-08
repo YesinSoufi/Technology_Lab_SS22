@@ -10,6 +10,10 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import tensorflow as tf
+import librosa
+import librosa.display
+import numpy as np
+import matplotlib.pyplot as plt
 
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
@@ -27,4 +31,9 @@ _ = plot_features.plot(subplots=True)
 
 plot_features = df_audio[plot_cols][:480]
 _ = plot_features.plot(subplots=True)
+# %%
+y, sr = librosa.load(librosa.util.AudioData\AudioData.wav()) # your file
+S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128, fmax=8000)
+librosa.display.specshow(librosa.power_to_db(S, ref=np.max), fmax=8000)
+plt.savefig('mel.png')
 # %%
