@@ -101,7 +101,7 @@ Supervised vs. unsupervised Training
 
 
 <h3>Challenge 1</h3> 
- * [ComponentDiagram](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/ComponentDiagram.md)
+ * [CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/CreateSamples.md)
 
 
 
