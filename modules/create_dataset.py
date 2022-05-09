@@ -7,10 +7,10 @@ import pandas as pd
 
 # %%
 # variables
-toCutAudioPath = '../AudioData/AudioData.wav'
-sampleSavePath = '../AudioData/AudioDataSamples/'
-sampleLength = 0.04
-cluster = 1000
+toCutAudioPath = '/Users/OKaplan/Documents/GitHub/Technology_Lab_SS22_3/AudioData/Classical/Philip Ravenel - The Last Day Of November.wav'
+sampleSavePath = '/Users/OKaplan/Documents/GitHub/Technology_Lab_SS22_3/AudioData/Classical/AudioDataSamples/withLabel/'
+sampleLength = 6
+#cluster = 1000
 
 # %%
 # create samples from cutting one long track
@@ -28,8 +28,8 @@ df_dataset_features
 # %%
 # cluster features and append label column
 df_load_features = pd.read_csv('../dataset_csv/dataset_features_' + str(sampleLength) + '_seconds.csv')
-df_dataset_labels = cluster_dataset.cluster_data(df_load_features, cluster = cluster)
-df_dataset_labels.to_csv('../dataset_csv/dataset_labels_' + str(sampleLength) + '_seconds_' + str(cluster) + '_cluster.csv', index=False)
-df_dataset_labels
+#df_dataset_labels = cluster_dataset.cluster_data(df_load_features, cluster = cluster)
+#df_dataset_labels.to_csv('../dataset_csv/dataset_labels_' + str(sampleLength) + '_seconds_' + str(cluster) + '_cluster.csv', index=False)
+#df_dataset_labels
 
 # %%
