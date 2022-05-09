@@ -101,13 +101,13 @@ Supervised vs. unsupervised Training
 
 
 <h3>Challenge 1</h3> 
-*[CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
+**[CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
 
 
 
 
 <h3>Challenge 2</h3> 
-*[Prototyp](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
+**[Prototyp](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
 
 <h3>Verfolgte Ansätze</h3> 
 * Zeitreihen-Vorhersage (Regression)
