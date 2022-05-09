@@ -1,6 +1,7 @@
 #%%
 #Importing Libraries
 from __future__ import print_function
+from distutils.command.build import build
 import tensorflow as tf
 import os
 import pandas as pd
@@ -16,6 +17,7 @@ from sklearn import metrics
 from tensorflow.keras.callbacks import ModelCheckpoint
 from datetime import datetime
 import AudioUtil
+import buildModel
 
 #%%
 # Label Parameter
@@ -51,7 +53,7 @@ extracted_df = extracted_df.drop(extracted_df[extracted_df['waveform'].map(len) 
 
 extracted_df
 
-# %%
+#%%
 #split into waveform and label
 X=np.array(extracted_df['waveform'].tolist(), dtype='float32')
 #X=np.array(X).astype("float32")
@@ -70,43 +72,52 @@ y=to_categorical(labelencoder.fit_transform(y))
 X_train = X
 y_train = y
 
-#%%
-#build model
 num_labels=y.shape[1]
+#%%
+#X_train = X_train.reshape(-1, 176400, 1)
+#X_train.shape
 
-model=Sequential()
+#%%
+#y_train.shape
+
+#build model
+#model=Sequential()
 ###first layer
-model.add(Dense(100,input_shape=(176400,)))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
+#model.add(Dense(100,input_shape=(176400,)))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
 ###second layer
-model.add(Dense(200))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
+#model.add(Dense(200))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
 ###third layer
-model.add(Dense(100))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
+#model.add(Dense(100))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
 ###fourth layer
-model.add(Dense(200))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
+#model.add(Dense(200))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
 ###fifth layer
-model.add(Dense(100))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
+#model.add(Dense(100))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
 
 ###final layer
-model.add(Dense(num_labels))
-model.add(Activation('softmax'))
+#model.add(Dense(num_labels))
+#model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer='adam')
+#model.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer='adam')
 
 #%%
 #train model with training dataset 
 #samples are labeld in order of the song they belong to
+
+model = buildModel.firstModel(num_labels)
+#model = buildModel.cnnModel()
+
 num_epochs = 1000
-num_batch_size = 32
+num_batch_size = 390
 
 checkpointer = ModelCheckpoint(filepath='saved_models/audio_classification.hdf5', 
                                verbose=1, save_best_only=True)
