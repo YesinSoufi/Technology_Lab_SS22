@@ -19,6 +19,9 @@ from datetime import datetime
 import AudioUtil
 import buildModel
 
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+tf.config.list_physical_devices()
+
 #%%
 # Label Parameter
 N_CLASSES = 25 # CHANGE HERE, total number of classes
@@ -74,7 +77,7 @@ y_train = y
 
 num_labels=y.shape[1]
 #%%
-#X_train = X_train.reshape(-1, 176400, 1)
+X_train = X_train.reshape(-1, 176400, 1)
 #X_train.shape
 
 #%%
@@ -113,11 +116,11 @@ num_labels=y.shape[1]
 #train model with training dataset 
 #samples are labeld in order of the song they belong to
 
-model = buildModel.firstModel(num_labels)
-#model = buildModel.cnnModel()
+#model = buildModel.firstModel(num_labels)
+model = buildModel.cnnModel()
 
-num_epochs = 1000
-num_batch_size = 390
+num_epochs = 10
+num_batch_size = 32
 
 checkpointer = ModelCheckpoint(filepath='saved_models/audio_classification.hdf5', 
                                verbose=1, save_best_only=True)
@@ -179,5 +182,7 @@ saveName = 'rebuild_song' + str(exportNr) + '.wav'
 
 AudioUtil.buildTrack(one_song, savePath, saveName)
 
+
+# %%
 
 # %%

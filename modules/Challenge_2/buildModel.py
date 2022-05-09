@@ -39,6 +39,8 @@ def cnnModel():
     model.add(MaxPooling1D(2))
     model.add(Conv1D(64, 3, activation='relu'))
     model.add(MaxPooling1D(2))
+    model.add(Conv1D(64, 3, activation='relu'))
+    model.add(MaxPooling1D(2))
     model.add(Flatten())
     model.add(Dense(64, activation='relu'))
     model.add(Dense(24, activation='softmax'))
