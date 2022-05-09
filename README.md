@@ -101,7 +101,9 @@ Supervised vs. unsupervised Training
 
 
 <h3>Challenge 1</h3> 
- * [Create Samples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
+![CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/assets/Music_Resampler.pdf)
+
+
 
 
 <h3>Challenge 2</h3> 
