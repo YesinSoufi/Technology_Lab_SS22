@@ -101,12 +101,14 @@ Supervised vs. unsupervised Training
 
 
 <h3>Challenge 1</h3> 
+<p> Unter modules Challenge1 sind alle benötigen Python Dateien um Samples zu erzeugen </p>
  * [CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/CreateSamples.md)
 
 
 
 
 <h3>Challenge 2</h3> 
+<p> Unter modules Challenge2 sind alle benötigen Python Dateien um ein rekonstruierten Song zu erzeugen </p>
 * [Prototyp](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
 
 <h3>Verfolgte Ansätze</h3> 
