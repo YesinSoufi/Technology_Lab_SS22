@@ -21,7 +21,9 @@ from pyparsing import col
 def buildTrack(df_samples, savePath, saveName):
     combined = AudioSegment.empty()
     for row in df_samples.iterrows():
-        temp = AudioSegment.from_file(row[1].filePath, format="wav")
+        file_path = row[1].filePath
+        file_path = file_path.replace('sasch', 'Sascha')
+        temp = AudioSegment.from_file(file_path, format="wav")
         combined = combined + temp
     
     combined.export(savePath + saveName, format="wav")

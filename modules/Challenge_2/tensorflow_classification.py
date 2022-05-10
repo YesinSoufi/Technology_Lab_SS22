@@ -41,10 +41,12 @@ df_test
 extracted_waveform=[]
 for index_num,row in df_test.iterrows():
     file_name = row['filePath']
-    file_name = file_name.replace('Sascha', 'sasch')
+    file_name = file_name.replace('sasch', 'Sascha')
     class_label = row["label"]
-    data, sr = librosa.load(file_name, mono=True)
-    extracted_waveform.append([data,class_label])
+    length = librosa.get_duration(filename=file_name)
+    data, sr = librosa.load(file_name, mono=True, offset=length-1.0)
+    if len(data) == 22050:
+        extracted_waveform.append([data,class_label])
 
 extracted_waveform
 
@@ -52,9 +54,13 @@ extracted_waveform
 #create df from extracted waveform and label
 extracted_df=pd.DataFrame(extracted_waveform,columns=['waveform','class'])
 extracted_df.head(10)
-extracted_df = extracted_df.drop(extracted_df[extracted_df['waveform'].map(len) < 176400].index)
+#extracted_df = extracted_df.drop(extracted_df[extracted_df['waveform'].map(len) < 176400].index)
 
-extracted_df
+extracted_df.shape
+
+#%%
+for row in extracted_df.iterrows():
+    print(str(len(row[1].waveform)))
 
 #%%
 #split into waveform and label
@@ -76,50 +82,19 @@ X_train = X
 y_train = y
 
 num_labels=y.shape[1]
-#%%
-X_train = X_train.reshape(-1, 176400, 1)
-#X_train.shape
+#X_train = X_train.reshape(-1, 176400, 1)
 
 #%%
-#y_train.shape
-
-#build model
-#model=Sequential()
-###first layer
-#model.add(Dense(100,input_shape=(176400,)))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###second layer
-#model.add(Dense(200))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###third layer
-#model.add(Dense(100))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###fourth layer
-#model.add(Dense(200))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###fifth layer
-#model.add(Dense(100))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-
-###final layer
-#model.add(Dense(num_labels))
-#model.add(Activation('softmax'))
-
-#model.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer='adam')
+X_train.shape
 
 #%%
 #train model with training dataset 
 #samples are labeld in order of the song they belong to
+import buildModel
+model = buildModel.firstModel(num_labels)
+#model = buildModel.cnnModel()
 
-#model = buildModel.firstModel(num_labels)
-model = buildModel.cnnModel()
-
-num_epochs = 10
+num_epochs = 1300
 num_batch_size = 32
 
 checkpointer = ModelCheckpoint(filepath='saved_models/audio_classification.hdf5', 
@@ -145,7 +120,6 @@ print("Training completed in time: ", duration)
 #predict label for each sample
 #sort samples asc on predicted labels
 #put samples in predicted order together and export
-
 #test on song
 one_song = pd.read_csv('data/csv/one_song.csv', index_col=0)
 one_song
@@ -157,7 +131,8 @@ pred = []
 for row in one_song.iterrows():
     if count < len(one_song):
         validate_path = row[1].filePath
-        audio, sample_rate = librosa.load(validate_path, mono=True)
+        validate_path = validate_path.replace('sasch', 'Sascha')
+        audio, sample_rate = librosa.load(validate_path, mono=True, duration=1)
         audio = np.array(audio).reshape (1,-1)
         predicted_label=model.predict(audio)
         #print(predicted_label)
@@ -177,7 +152,7 @@ one_song = one_song.sort_values('pred')
 #export predicted sample order to wav-file
 #one_song.to_csv('new_samples_csv/test2.csv')
 savePath = 'data/tracks_export/'
-exportNr = 3
+exportNr = 5
 saveName = 'rebuild_song' + str(exportNr) + '.wav'
 
 AudioUtil.buildTrack(one_song, savePath, saveName)

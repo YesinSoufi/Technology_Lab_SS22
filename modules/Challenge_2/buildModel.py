@@ -5,7 +5,8 @@ from tensorflow.keras.optimizers import Adam
 def firstModel(num_labels):
     model=Sequential()
     ###first layer
-    model.add(Dense(100,input_shape=(176400,)))
+    #model.add(Dense(100,input_shape=(176400,)))
+    model.add(Dense(100,input_shape=(22050,)))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
     ###second layer
