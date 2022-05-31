@@ -22,7 +22,7 @@ import buildModel
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 tf.config.list_physical_devices()
 
-#%%
+
 # Label Parameter
 N_CLASSES = 25 # CHANGE HERE, total number of classes
 
@@ -36,7 +36,7 @@ labels = []
 
 df_test = pd.read_csv(train_file, index_col=0)
 df_test
-#%%
+
 #load waveform from samples with filePath
 extracted_waveform=[]
 for index_num,row in df_test.iterrows():
@@ -50,7 +50,7 @@ for index_num,row in df_test.iterrows():
 
 extracted_waveform
 
-#%%
+
 #create df from extracted waveform and label
 extracted_df=pd.DataFrame(extracted_waveform,columns=['waveform','class'])
 extracted_df.head(10)
@@ -58,24 +58,20 @@ extracted_df.head(10)
 
 extracted_df.shape
 
-#%%
 for row in extracted_df.iterrows():
     print(str(len(row[1].waveform)))
 
-#%%
 #split into waveform and label
 X=np.array(extracted_df['waveform'].tolist(), dtype='float32')
 #X=np.array(X).astype("float32")
 y=np.array(extracted_df['class'].tolist())
 
 
-#%%
 #encode labels
 labelencoder=LabelEncoder()
 y=to_categorical(labelencoder.fit_transform(y))
 
-# %%
-#we dont need to split, separate training and validation data
+#we dont split, separate training and validation data
 #from sklearn.model_selection import train_test_split
 #X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=0)
 X_train = X
@@ -84,18 +80,20 @@ y_train = y
 num_labels=y.shape[1]
 #X_train = X_train.reshape(-1, 176400, 1)
 
-#%%
+
 X_train.shape
+#y_train.shape
 
 #%%
 #train model with training dataset 
 #samples are labeld in order of the song they belong to
 import buildModel
-model = buildModel.firstModel(num_labels)
+#model = buildModel.firstModel(num_labels)
 #model = buildModel.cnnModel()
+model = buildModel.model_Gruppe4(num_labels)
 
-num_epochs = 1300
-num_batch_size = 32
+num_epochs = 20
+num_batch_size = 30
 
 checkpointer = ModelCheckpoint(filepath='saved_models/audio_classification.hdf5', 
                                verbose=1, save_best_only=True)
@@ -156,8 +154,5 @@ exportNr = 5
 saveName = 'rebuild_song' + str(exportNr) + '.wav'
 
 AudioUtil.buildTrack(one_song, savePath, saveName)
-
-
-# %%
 
 # %%
