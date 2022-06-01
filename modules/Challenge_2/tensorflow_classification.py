@@ -41,7 +41,7 @@ df_test
 extracted_waveform=[]
 for index_num,row in df_test.iterrows():
     file_name = row['filePath']
-    file_name = file_name.replace('sasch', 'Sascha')
+    #file_name = file_name.replace('sasch', 'Sascha')
     class_label = row["label"]
     length = librosa.get_duration(filename=file_name)
     data, sr = librosa.load(file_name, mono=True, offset=length-1.0)
