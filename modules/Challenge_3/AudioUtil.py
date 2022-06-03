@@ -4,19 +4,50 @@ import pandas as pd
 import numpy as np
 import pandas as pd
 import os
-
 from glob import glob
 import IPython.display as ipd
-
 from pydub import AudioSegment
 from pydub.utils import make_chunks
-
 import shutil
 import random
 from pathlib import Path
-
 from pyparsing import col
+import librosa
+import librosa.display
 
+def getMelSpectrogram(waveForm, sampleRate):
+    mel_sgram = librosa.feature.melspectrogram(waveForm, sr=sampleRate)
+    mel_sgram_db = librosa.power_to_db(mel_sgram, ref=np.max)
+    
+    #librosa.display.specshow(mel_sgram_db, sr=sr, x_axis='time', y_axis='mel')
+
+    return mel_sgram_db
+
+#get startslice or endslice of sample
+#True -> Slice from startpoint
+#False -> Slice form endpoint
+def getWaveformSlice(waveform_array, sample_length, slice_length, start=True):
+    num_datapoints = len(waveform_array) / sample_length #get num datapoints per second
+    slice_datapoints = num_datapoints * slice_length
+    if start==True:
+        sample_slice = waveform_array[:slice_datapoints]
+    elif start==False:
+        sample_slice = waveform_array[-slice_datapoints:]
+    else:
+        print('start parameter is no boolean --> ' + start)
+
+    return sample_slice
+
+def loadWaveform(filePath):
+    #load waveform from samples with filePath
+    extracted_waveForm = []
+    extracted_sampleRate = []
+    length = librosa.get_duration(filename=filePath)
+    data, sr = librosa.load(filePath, mono=True, offset=length-1.0)
+    extracted_waveForm.append(data)
+    extracted_sampleRate.append(sr)
+
+    return extracted_waveForm, extracted_sampleRate
 
 def buildTrack(df_samples, savePath, saveName):
     combined = AudioSegment.empty()
@@ -41,6 +72,7 @@ def cutSamples(myAudioPath, savePath, sampleLength, overlap = 0):
     del chunks
     del chunk_name
     del chunk
+    
     return print("Samples export successful")
 
 def createSampleDF(audioPath):
@@ -52,12 +84,14 @@ def createSampleDF(audioPath):
     df_dataSet['ID'] = df_dataSet.index+1
     df_dataSet = df_dataSet[['ID','audio_name','filePath']]
     df_dataSet = sort_Dataframe(df_dataSet)
+    
     return df_dataSet
 
 def createSamples(myAudioPath,savePath, sampleLength, overlap = 0):
     cutSamples(myAudioPath=myAudioPath,savePath=savePath,sampleLength=sampleLength)
     df_dataSet=createSampleDF(audioPath=savePath)
     df_dataSet=sort_Dataframe(df_dataSet)
+    
     return df_dataSet
 
 def sort_Dataframe(df_dataSet):
