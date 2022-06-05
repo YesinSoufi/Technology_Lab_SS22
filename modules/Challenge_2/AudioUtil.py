@@ -21,7 +21,9 @@ from pyparsing import col
 def buildTrack(df_samples, savePath, saveName):
     combined = AudioSegment.empty()
     for row in df_samples.iterrows():
-        temp = AudioSegment.from_file(row[1].filePath, format="wav")
+        file_path = row[1].filePath
+        file_path = file_path.replace('sasch', 'Sascha')
+        temp = AudioSegment.from_file(file_path, format="wav")
         combined = combined + temp
     
     combined.export(savePath + saveName, format="wav")
@@ -71,17 +73,3 @@ def sort_Dataframe(df_dataSet):
     df_sorted = df_sorted.drop('index', 1)
 
     return df_sorted
-
-
-
-# %%
-#test code
-#soundfiles = pd.read_csv('new_samples_csv/test2.csv', index_col=0)
-#soundfiles
-
-#combined = AudioSegment.empty()
-#for row in soundfiles.iterrows():
-#    temp = AudioSegment.from_file(row[1].filePath, format="wav")
-#    combined = combined + temp
-
-#file_handle = combined.export("new_samples_csv/song2.wav", format="wav")
