@@ -1,11 +1,11 @@
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Activation,Flatten
+from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 from datetime import datetime
 
 def predictSimilarity(sample_array, model):
-    prediction = model(sample_array)
+    prediction = model.predict(sample_array)
     return prediction
 
 def trainModel(epochs, batch_size, model, data):
@@ -19,6 +19,27 @@ def trainModel(epochs, batch_size, model, data):
     duration = datetime.now() - start
     print("Training completed in time: ", duration)
     return model
+
+#-----------------------------------#
+#   NN-Models
+#-----------------------------------#
+def cnnTest():
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1', 
+                    input_shape=(128, 44, 1)))
+    model.add(MaxPooling2D((2, 2), name='maxpool_1'))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='conv_2'))
+    model.add(MaxPooling2D((2, 2), name='maxpool_2'))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='conv_3'))
+    model.add(MaxPooling2D((2, 2), name='maxpool_3'))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='conv_4'))
+    model.add(MaxPooling2D((2, 2), name='maxpool_4'))
+    model.add(Flatten())
+
+    model.compile(loss='binary_crossentropy', metrics=['accuracy'])
+
+    return model
+
 
 #old models/ random models
 def firstModel(num_labels):

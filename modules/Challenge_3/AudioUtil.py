@@ -15,6 +15,9 @@ from pyparsing import col
 import librosa
 import librosa.display
 
+def showSpectrogram(spec, sampleRate):
+    librosa.display.specshow(spec, sr=sampleRate, x_axis='time', y_axis='mel')
+
 def getMelSpectrogram(waveForm, sampleRate):
     mel_sgram = librosa.feature.melspectrogram(waveForm, sr=sampleRate)
     mel_sgram_db = librosa.power_to_db(mel_sgram, ref=np.max)
