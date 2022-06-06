@@ -14,6 +14,7 @@ from pathlib import Path
 from pyparsing import col
 import librosa
 import librosa.display
+import matplotlib.pyplot as plt
 
 def showSpectrogram(spec, sampleRate):
     librosa.display.specshow(spec, sr=sampleRate, x_axis='time', y_axis='mel')
@@ -25,6 +26,18 @@ def getMelSpectrogram(waveForm, sampleRate):
     #librosa.display.specshow(mel_sgram_db, sr=sr, x_axis='time', y_axis='mel')
 
     return mel_sgram_db
+
+def saveMelSpectrogram(id, waveForm, sampleRate):
+    fileName = str(id) + '_spec.png'
+    savePath = 'Mel_Spec/' + fileName
+
+    mel_sgram = librosa.feature.melspectrogram(waveForm, sr=sampleRate)
+    mel_sgram_db = librosa.power_to_db(mel_sgram, ref=np.max)
+    
+    librosa.display.specshow(mel_sgram_db, sr=sampleRate, x_axis='time', y_axis='mel')
+    plt.axis('off')
+    plt.savefig(savePath,transparent=True,bbox_inches='tight', pad_inches=0.0)
+    return savePath
 
 #get startslice or endslice of sample
 #True -> Slice from startpoint
@@ -50,7 +63,8 @@ def loadWaveform(filePath):
     extracted_waveForm.append(data)
     extracted_sampleRate.append(sr)
 
-    return extracted_waveForm, extracted_sampleRate
+    #return extracted_waveForm, extracted_sampleRate
+    return data, sr
 
 def buildTrack(df_samples, savePath, saveName):
     combined = AudioSegment.empty()
