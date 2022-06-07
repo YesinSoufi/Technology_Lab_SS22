@@ -77,20 +77,23 @@ def buildTrack(df_samples, savePath, saveName):
     combined.export(savePath + saveName, format="wav")
     print('exported new song: ' + savePath+saveName)
 
-def cutSamples(myAudioPath, savePath, sampleLength, overlap = 0):
+def cutSamples(myAudioPath, savePath, sampleLength, nameStartID,overlap = 0):
     print(myAudioPath)
     myaudio = AudioSegment.from_file(myAudioPath)
     chunk_length_ms = sampleLength*1000 # pydub calculates in millisec
     chunks = make_chunks(myaudio,chunk_length_ms) #Make chunks of one sec 
+    id = nameStartID+1
     for i, chunk in enumerate(chunks): 
-        chunk_name = str(i+1) + '.wav' 
+        chunk_name = str(id) + '.wav' 
         chunk.export(savePath + chunk_name, format='wav')
+        id = id+1
+    
     del myaudio
     del chunks
     del chunk_name
     del chunk
     
-    return print("Samples export successful")
+    return id
 
 def createSampleDF(audioPath):
     data = []

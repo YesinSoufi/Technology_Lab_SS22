@@ -7,6 +7,7 @@ import pandas as pd
 from pathlib import Path
 import cv2
 
+#%%
 #variables
 #training_data = 'C:/Users/sasch/Music/TechoLab22/Samples/Electronic'
 training_data = 'C:/Users/Sascha/Music/TechoLab22/Samples/Electronic'
@@ -53,10 +54,11 @@ specs = []
 for path in df_spec:
     temp = cv2.imread(path)
     temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
-    temp = cv2.resize(temp, (332, 220), interpolation = cv2.INTER_AREA)
+    #temp = cv2.resize(temp, (332, 220), interpolation = cv2.INTER_AREA)
     specs.append(temp)
 
 specs = np.asarray(specs)
+
 model = ModelUtil.autoEncoderTest()
 model.summary()
 #model = ModelUtil.trainModel(batch_size, epochs, model, specs)
@@ -94,6 +96,10 @@ for i in range(5):
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 plt.show()
+
+
+
+
 
 #%%
 type(test_img)
@@ -137,8 +143,21 @@ X=np.array(df_placeholder['placeholder'].tolist(), dtype='float32')
 
 # # %%
 # len(sampleSpec)
-# # %%
+
+
 
 #%%
+#cut new samples
+pathMusic = 'C:/Users/Sascha/Music/TechoLab22/Electronic/Generator.wav'
+savePath = 'C:/Users/Sascha/Music/TechoLab22/Samples/Electronic_3sec/Song_A/'
+sampleLength = 3
+sampleStartID = 0
+
+#for file in Path(pathMusic).glob('*.wav'):
+id = AudioUtil.cutSamples(savePath, savePath, sampleLength, sampleStartID)
+print('Cut & Export done: -- ' + str(pathMusic))
+print('Files created: -- ' + str(id))
+sampleStartID = id
 
 
+# %%
