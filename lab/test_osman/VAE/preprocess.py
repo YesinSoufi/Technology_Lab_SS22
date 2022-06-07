@@ -183,7 +183,7 @@ if __name__ == "__main__":
 
     SPECTROGRAMS_SAVE_DIR = "/Users/OKaplan/Documents/GitHub/Technology_Lab_SS22_3/AudioData/Neuer Ordner/Sample Spectrogram/"
     MIN_MAX_VALUES_SAVE_DIR = "/Users/OKaplan/Documents/GitHub/Technology_Lab_SS22_3/AudioData/Neuer Ordner/"
-    FILES_DIR = "/Users/OKaplan/Documents/GitHub/Technology_Lab_SS22_3/AudioData/Training/Label/Classical"
+    FILES_DIR = "/Users/OKaplan/Documents/GitHub/Technology_Lab_SS22_3/AudioData/Training/Label/Jazz/"
 
     # instantiate all objects
     loader = Loader(SAMPLE_RATE, DURATION, MONO)
