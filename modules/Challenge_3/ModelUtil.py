@@ -1,11 +1,12 @@
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Activation,Flatten
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.callbacks import ModelCheckpoint
+
+from keras.models import Sequential
+from keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Activation,Flatten
+from keras.optimizers import Adam
+from keras.callbacks import ModelCheckpoint
 from datetime import datetime
 
 def predictSimilarity(sample_array, model):
-    prediction = model(sample_array)
+    prediction = model.predict(sample_array)
     return prediction
 
 def trainModel(epochs, batch_size, model, data):
