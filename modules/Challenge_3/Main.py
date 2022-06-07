@@ -8,7 +8,8 @@ from pathlib import Path
 import cv2
 
 #variables
-training_data = 'C:/Users/sasch/Music/TechoLab22/Samples/Electronic'
+#training_data = 'C:/Users/sasch/Music/TechoLab22/Samples/Electronic'
+training_data = 'C:/Users/Sascha/Music/TechoLab22/Samples/Electronic'
 samples_data = 'placeholder filepath'
 epochs = 30
 batch_size = 5
@@ -64,8 +65,10 @@ model.summary()
 specs.shape
 
 #%%
-model.fit(specs, specs, epochs=5,
+model.fit(specs, specs, epochs=30,
                       validation_data=[specs, specs])
+
+model.summary
 #model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
 #%%
