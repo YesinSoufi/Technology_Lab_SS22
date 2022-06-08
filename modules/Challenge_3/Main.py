@@ -7,9 +7,11 @@ import pandas as pd
 from pathlib import Path
 import cv2
 
+#%%
 #variables
 #training_data = 'C:/Users/sasch/Music/TechoLab22/Samples/Electronic'
-training_data = 'C:/Users/Sascha/Music/TechoLab22/Samples/Electronic'
+training_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_A'
+vali_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B'
 samples_data = 'placeholder filepath'
 epochs = 30
 batch_size = 5
@@ -42,33 +44,49 @@ for index, row in enumerate(df_training_data.itertuples()):
     allSamples.append([waveForm,sampleRate,melSpec])
     # df_training_data.loc[df_training_data.index[index], 'waveform'] = waveForm
     # df_training_data.loc[df_training_data.index[index], 'sampleRate'] = sampleRate
+    break
 
 df_samples = pd.DataFrame(allSamples,columns=['waveform','samplesrate','mel-spectrogram'])
 df_training_data = pd.concat([df_training_data, df_samples], axis=1)
 df_training_data
 
+#%%
 df_spec = df_training_data['mel-spectrogram']
-specs = []
+train = []
+vali = []
 
-for path in df_spec:
-    temp = cv2.imread(path)
+#%%
+specsPath_train = 'Mel_Spec/Train_Spec'
+specsPath_vali = 'Mel_Spec/Vali_Spec'
+train = []
+vali = []
+for file in Path(specsPath_train).glob('*.png'):
+    temp = cv2.imread(str(file))
     temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
-    temp = cv2.resize(temp, (332, 220), interpolation = cv2.INTER_AREA)
-    specs.append(temp)
+    temp = cv2.resize(temp, (256, 256), interpolation = cv2.INTER_AREA)
+    train.append(temp)
 
-specs = np.asarray(specs)
-model = ModelUtil.autoEncoderTest()
+for file in Path(specsPath_vali).glob('*.png'):
+    temp = cv2.imread(str(file))
+    temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
+    temp = cv2.resize(temp, (256, 256), interpolation = cv2.INTER_AREA)
+    vali.append(temp)
+
+train = np.asarray(train)
+vali = np.asarray(vali)
+
+model, enco, deco = ModelUtil.autoEncoderTest()
 model.summary()
 #model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
 #%%
-specs.shape
+enco.summary()
 
 #%%
-model.fit(specs, specs, epochs=30,
-                      validation_data=[specs, specs])
-
-model.summary
+deco.summary()
+#%%
+model.fit(train, train, epochs=30,
+                      validation_data=[vali, vali])
 #model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
 #%%
@@ -97,6 +115,9 @@ plt.show()
 
 #%%
 type(test_img)
+
+
+
 
 #%%
 df_placeholder = pd.DataFrame()
@@ -137,8 +158,37 @@ X=np.array(df_placeholder['placeholder'].tolist(), dtype='float32')
 
 # # %%
 # len(sampleSpec)
-# # %%
+
+#cut new samples
+# pathMusic = 'C:/Users/Sascha/Music/TechoLab22/Electronic/Runner.wav'
+# savePath = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B/'
+# sampleLength = 3
+# sampleStartID = 0
+
+# #for file in Path(pathMusic).glob('*.wav'):
+# id = AudioUtil.cutSamples(pathMusic, savePath, sampleLength, sampleStartID)
+# print('Cut & Export done: -- ' + str(pathMusic))
+# print('Files created: -- ' + str(id))
+# sampleStartID = id
 
 #%%
+test_img = cv2.imread('Mel_Spec/Train_Spec/20_spec.png')
+test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
+test_img = cv2.resize(test_img, (256, 256), interpolation = cv2.INTER_AREA)
+test_img = np.asarray(test_img)
 
+test_img.shape
 
+#%%
+test_img = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
+test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
+#test_img = cv2.resize(test_img, (128, 128), interpolation = cv2.INTER_AREA)
+test_img = np.asarray(test_img)
+
+test_img
+cv2.imshow('HSV image', test_img) 
+cv2.waitKey(0)
+cv2.destroyAllWindows() 
+cv2.waitKey(1)
+
+# %%
