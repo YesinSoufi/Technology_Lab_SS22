@@ -12,13 +12,12 @@ import cv2
 #training_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_A'
 #vali_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B'
 #samples_data = 'placeholder filepath'
-batch_size = 10
-epochs = 40
-model_name = 'utoEncoderTest_sl_10_40'
+batch_size = 5
+epochs = 100
+model_name = 'utoEncoderTest_sl_5_100'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
-#%%
 specsPath_train = 'Mel_Spec/Train_Spec'
 specsPath_vali = 'Mel_Spec/Vali_Spec'
 train = []
