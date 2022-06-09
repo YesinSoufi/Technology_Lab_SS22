@@ -26,14 +26,14 @@ train = []
 vali = []
 for file in Path(specsPath_train).glob('*.png'):
     temp = cv2.imread(str(file))
-    temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
+    #temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
     temp = cv2.resize(temp, (256, 256), interpolation = cv2.INTER_AREA)
     temp = temp / 255
     train.append(temp)
 
 for file in Path(specsPath_vali).glob('*.png'):
     temp = cv2.imread(str(file))
-    temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
+    #temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
     temp = cv2.resize(temp, (256, 256), interpolation = cv2.INTER_AREA)
     temp = temp / 255
     vali.append(temp)
@@ -64,11 +64,21 @@ test_img = cv2.resize(test_img, (256, 256), interpolation = cv2.INTER_AREA)
 test_img = test_img / 255
 test_img = test_img.reshape(1,256,256,3)
 
+#%%
 pred = model.predict(test_img)
 pred.shape
 
 #%%
 cv2.imshow('Test1!', pred[0,...]) 
+cv2.waitKey(0)
+cv2.destroyAllWindows() 
+cv2.waitKey(1)
+
+
+#%%
+#test = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
+#test = cv2.resize(test, (256, 256), interpolation = cv2.INTER_AREA)
+cv2.imshow('Test1!', test_img[0,...]) 
 cv2.waitKey(0)
 cv2.destroyAllWindows() 
 cv2.waitKey(1)
