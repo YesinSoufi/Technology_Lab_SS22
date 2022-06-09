@@ -1,8 +1,9 @@
-
-from keras.models import Sequential
-from keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Activation,Flatten
-from keras.optimizers import Adam
-from keras.callbacks import ModelCheckpoint
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras import losses
 from datetime import datetime
 
 def predictSimilarity(sample_array, model):
@@ -20,6 +21,69 @@ def trainModel(epochs, batch_size, model, data):
     duration = datetime.now() - start
     print("Training completed in time: ", duration)
     return model
+
+#-----------------------------------#
+#   NN-Models
+#-----------------------------------#
+def cnnTest():
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1', 
+                    input_shape=(256, 256, 3)))
+    model.add(MaxPooling2D((2, 2), name='maxpool_1'))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', name='conv_2'))
+    model.add(MaxPooling2D((2, 2), name='maxpool_2'))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='conv_3'))
+    model.add(MaxPooling2D((2, 2), name='maxpool_3'))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same', name='conv_4'))
+    model.add(MaxPooling2D((2, 2), name='maxpool_4'))
+    model.add(Flatten())
+
+    model.compile(optimizer='adam',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+    return model
+
+def autoEncoderTest():
+    conv_encoder = Sequential([
+        #Reshape([217,334, 3], input_shape=[217, 334, 3]),
+        #Reshape([220,332, 3], input_shape=[256, 332, 3]),
+        #Conv2D(16, kernel_size=3, padding="SAME", activation="selu", input_shape=(256,256,3)),
+        #MaxPool2D(pool_size=2),
+        #Conv2D(32, kernel_size=3, padding="SAME", activation="selu"),
+        #MaxPool2D(pool_size=2),
+        #Conv2D(64, kernel_size=3, padding="SAME", activation="selu"),
+        #MaxPool2D(pool_size=2)  
+        #Input(shape=(256, 256, 3)),
+        Conv2D(64, (3, 3), activation='relu', padding='same', strides=2, input_shape=(256,256,3)),
+        Conv2D(32, (3,3), activation='relu', padding='same', strides=2),
+        Conv2D(16, (3,3), activation='relu', padding='same', strides=2),
+        Conv2D(8, (3, 3), activation='relu', padding='same', strides=2)      
+    ])
+
+    #print(conv_encoder.layers[5].output_shape)
+    #print(conv_encoder.layers[6].output_shape)
+
+    conv_decoder = Sequential([
+        #Conv2DTranspose(32, kernel_size=3, padding="SAME", activation="selu",
+        #                            input_shape=[32, 32, 64]),
+        #Conv2DTranspose(16, kernel_size=3, padding="SAME", activation="selu"),
+        #Conv2DTranspose(3, kernel_size=3, padding="SAME", activation="sigmoid"),
+        #Reshape([217,334], input_shape=[220, 332, 1])
+        Conv2DTranspose(8, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(32, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(64, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2D(3, kernel_size=(3, 3), activation='sigmoid', padding='same')
+    ])
+
+    conv_ae = Sequential([conv_encoder, conv_decoder])
+
+    #conv_ae.compile(optimizer='adam', loss = losses.MeanSquaredError())
+    conv_ae.compile(optimizer='adam', loss="binary_crossentropy")
+    
+
+    return conv_ae, conv_encoder, conv_decoder
 
 #old models/ random models
 def firstModel(num_labels):
