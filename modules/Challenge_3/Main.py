@@ -7,15 +7,14 @@ import pandas as pd
 from pathlib import Path
 import cv2
 
-#%%
 #variables
 #training_data = 'C:/Users/sasch/Music/TechoLab22/Samples/Electronic'
 #training_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_A'
 #vali_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B'
 #samples_data = 'placeholder filepath'
-epochs = 30
-batch_size = 5
-model_name = 'utoEncoderTest_sl_1'
+batch_size = 10
+epochs = 40
+model_name = 'utoEncoderTest_sl_10_40'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
@@ -50,6 +49,7 @@ enco.summary()
 
 #%%
 deco.summary()
+
 #%%
 #train the model
 model.fit(train, train, batch_size, epochs=epochs,
@@ -57,9 +57,8 @@ model.fit(train, train, batch_size, epochs=epochs,
 model.save('saved_models/' + model_name)
 
 #%%
-
 test_img = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
-test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
+#test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
 test_img = cv2.resize(test_img, (256, 256), interpolation = cv2.INTER_AREA)
 test_img = test_img / 255
 test_img = test_img.reshape(1,256,256,3)
