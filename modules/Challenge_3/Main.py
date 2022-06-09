@@ -64,12 +64,14 @@ for file in Path(specsPath_train).glob('*.png'):
     temp = cv2.imread(str(file))
     temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
     temp = cv2.resize(temp, (256, 256), interpolation = cv2.INTER_AREA)
+    temp = temp / 255
     train.append(temp)
 
 for file in Path(specsPath_vali).glob('*.png'):
     temp = cv2.imread(str(file))
     temp = cv2.cvtColor(temp, cv2.COLOR_BGR2RGB)
     temp = cv2.resize(temp, (256, 256), interpolation = cv2.INTER_AREA)
+    temp = temp / 255
     vali.append(temp)
 
 train = np.asarray(train)
@@ -90,28 +92,41 @@ model.fit(train, train, epochs=30,
 #model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
 #%%
-import matplotlib.pyplot as plt
 
-test_img = cv2.imread('Mel_Spec/25_spec.png')
+test_img = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
 test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
 test_img = cv2.resize(test_img, (332, 220), interpolation = cv2.INTER_AREA)
+test_img = test_img / 255
 
 pred = model.predict(test_img)
-plt.figure(figsize=(20, 4))
-for i in range(5):
-    # Display original
-    ax = plt.subplot(2, 5, i + 1)
-    plt.imshow(test_img[i].reshape(28, 28))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-    # Display reconstruction
-    ax = plt.subplot(2, 5, i + 1 + 5)
-    plt.imshow(pred[i].reshape(28, 28))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-plt.show()
+pred.shape
+
+
+#%%
+cv2.imshow('Test1!', test_img) 
+cv2.waitKey(0)
+cv2.destroyAllWindows() 
+cv2.waitKey(1)
+
+#%%
+model.save('saved_models/model_1')
+
+
+# plt.figure(figsize=(20, 4))
+# for i in range(5):
+#     # Display original
+#     ax = plt.subplot(2, 5, i + 1)
+#     plt.imshow(test_img[i].reshape(28, 28))
+#     plt.gray()
+#     ax.get_xaxis().set_visible(False)
+#     ax.get_yaxis().set_visible(False)
+#     # Display reconstruction
+#     ax = plt.subplot(2, 5, i + 1 + 5)
+#     plt.imshow(pred[i].reshape(28, 28))
+#     plt.gray()
+#     ax.get_xaxis().set_visible(False)
+#     ax.get_yaxis().set_visible(False)
+# plt.show()
 
 #%%
 type(test_img)
