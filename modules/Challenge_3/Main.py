@@ -14,7 +14,7 @@ import cv2
 #samples_data = 'placeholder filepath'
 batch_size = 5
 epochs = 100
-model_name = 'utoEncoderTest_sl_5_100'
+model_name = 'autoEncoderTest1_sl_5_100'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
@@ -39,7 +39,7 @@ for file in Path(specsPath_vali).glob('*.png'):
 train = np.asarray(train)
 vali = np.asarray(vali)
 
-model, enco, deco = ModelUtil.autoEncoderTest()
+model, enco, deco = ModelUtil.autoEncoder1()
 model.summary()
 #model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
