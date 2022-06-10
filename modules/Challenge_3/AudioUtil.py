@@ -29,9 +29,10 @@ def getMelSpectrogram(waveForm, sampleRate):
 
 def saveMelSpectrogram(id, waveForm, sampleRate):
     fileName = str(id) + '_spec.png'
-    savePath = 'Mel_Spec/' + fileName
+    savePath = 'Mel_Spec/Train_Spec/' + fileName
+    n_mels = 128
 
-    mel_sgram = librosa.feature.melspectrogram(waveForm, sr=sampleRate)
+    mel_sgram = librosa.feature.melspectrogram(waveForm, sr=sampleRate, n_mels = n_mels)
     mel_sgram_db = librosa.power_to_db(mel_sgram, ref=np.max)
     
     librosa.display.specshow(mel_sgram_db, sr=sampleRate, x_axis='time', y_axis='mel')
@@ -77,20 +78,22 @@ def buildTrack(df_samples, savePath, saveName):
     combined.export(savePath + saveName, format="wav")
     print('exported new song: ' + savePath+saveName)
 
-def cutSamples(myAudioPath, savePath, sampleLength, overlap = 0):
+def cutSamples(myAudioPath, savePath, sampleLength, nameStartID,overlap = 0):
     print(myAudioPath)
     myaudio = AudioSegment.from_file(myAudioPath)
     chunk_length_ms = sampleLength*1000 # pydub calculates in millisec
     chunks = make_chunks(myaudio,chunk_length_ms) #Make chunks of one sec 
+    num = 0
     for i, chunk in enumerate(chunks): 
         chunk_name = str(i+1) + '.wav' 
         chunk.export(savePath + chunk_name, format='wav')
+    
     del myaudio
     del chunks
     del chunk_name
     del chunk
     
-    return print("Samples export successful")
+    return print('Cutting done!')
 
 def createSampleDF(audioPath):
     data = []
