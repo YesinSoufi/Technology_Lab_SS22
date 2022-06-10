@@ -14,7 +14,7 @@ import cv2
 #samples_data = 'placeholder filepath'
 batch_size = 5
 epochs = 100
-model_name = 'autoEncoderTest1_sl_5_100'
+model_name = 'autoEncoder1_sl_5_100'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
