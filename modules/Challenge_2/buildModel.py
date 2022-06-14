@@ -5,7 +5,8 @@ from tensorflow.keras.optimizers import Adam
 def firstModel(num_labels):
     model=Sequential()
     ###first layer
-    model.add(Dense(100,input_shape=(176400,)))
+    #model.add(Dense(100,input_shape=(176400,)))
+    model.add(Dense(100,input_shape=(22050,)))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
     ###second layer
@@ -35,7 +36,9 @@ def firstModel(num_labels):
 
 def cnnModel():
     model = Sequential()
-    model.add(Conv1D(64, 3, activation='relu', input_shape=(176400,1)))
+    model.add(Conv1D(64, 3, activation='relu', input_shape=(22050,)))
+    model.add(MaxPooling1D(2))
+    model.add(Conv1D(64, 3, activation='relu'))
     model.add(MaxPooling1D(2))
     model.add(Conv1D(64, 3, activation='relu'))
     model.add(MaxPooling1D(2))
@@ -46,3 +49,20 @@ def cnnModel():
     model.compile(Adam(lr=.0001), loss='categorical_crossentropy', metrics=['accuracy'])
 
     return model
+
+def model_Gruppe4(num_layer):
+    model = Sequential()
+
+    model.add(Conv1D(256, 3, activation='relu', input_shape=(22050,1)))
+    model.add(MaxPooling1D(3))
+    model.add(Conv1D(1024, 3, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(MaxPooling1D(2))
+    model.add(Flatten())
+    model.add(Dense(50, activation='relu'))
+    model.add(Dense(num_layer))
+
+    model.compile(loss='categorical_crossentropy', metrics=['accuracy'])
+    
+    return model
+

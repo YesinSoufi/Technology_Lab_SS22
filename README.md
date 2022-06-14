@@ -30,7 +30,7 @@ Ziel des Projekts ist die Beantwortung der folglich definierten Forschungsfragen
    * Wie ähnlich müssen sich die Ursprungstracks bzgl. Stimmung, Genre etc. sein? 
    * Müssen Metadaten wie Lautstärke, Tempo, Spektrum, etc. mit einbezogen werden?
 
-<h4>Systemanforderungen:</h4> 
+<h3>Systemanforderungen:</h3> 
 Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich daraus ableitenden Systemanforderungen wurden Personas und User Stories erarbeitet. 
 
   * [Personas](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/Personas.md)
@@ -38,14 +38,14 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
 
  
 
-<h4>Systementwurf:</h4> 
+<h3>Systementwurf:</h3> 
 
   * Scenarios and Glossar
  * [ComponentDiagram](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/ComponentDiagram.md)
   * [Machine learning Konzept](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/MachineLearningKonzept.pdf)
   * [Training data](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/TrainingData.md)
 
-<h5>Aktuell benutzte Libraries</h5> 
+<h3>Aktuell benutzte Libraries</h3> 
 
  * pandas
  * random
@@ -63,50 +63,57 @@ Zusätzlich zu den vorgegebenen Projektschritten (Challenges) und den sich darau
  * pathlib
 
 
-<h3>Wissenschaftliche Basis</h3>
+<h3>Wissenschaftliche Grundlagen</h3>
 
+Regression und Klassifizierung 
+* Regression: Bei der Regression soll eine kontinuierliche Zielvariable, also unbekannte Werte, vorhergesagt werden (Marsland, Murphy). 
+* Klassifizierung: Es stehen bereits Klassen mit bestimmten Eigenschaften fest und es soll eine Zuordnung weiterer Daten zu den existierenden Klassen vorgenommen werden (Buxmann).
+
+
+Supervised und unsupervised Training
+* Supervised
+    * der ideale Ausgabewert ist spezifiziert 
+* Unsupervised
+    * Keine idealen Ausgabewerte vorgegeben
+    * Das neuronale Netz lernt es die Eingabedaten in eine Reihe von Gruppen einzuordnen, die durch die Ausgabe Neuronen definiert sind (Heaton)
+
+
+Feed-forward und rekursive Netze
+* Feed-forward Netze
+    * CNN
+    * Autoencoder
+* Rekursive Netze
+    * LSTM
+    * Boltzmann-Maschine
+
+
+<h3>Challenge 1</h3> 
+Unter modules Challenge1 sind alle benötigten Python Dateien um Samples zu erzeugen
+ * [CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/CreateSamples.md)
+
+
+<h3>Challenge 2</h3> 
+Unter modules Challenge2 sind alle benötigten Python Dateien um ein rekonstruierten Song zu erzeugen 
+* [Prototyp](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
+
+
+<h3>Verfolgte Ansätze</h3> 
+* Zeitreihen-Vorhersage (Regression)
+
+Im ersten Ansatz wurde (auf Empfehlung) eine Zeitreihen-Vorhersage mittels Regression verfolgt. Bei der Regression soll eine kontinuierliche Zielvariable, also unbekannte Werte, vorhergesagt werden (Marsland; Murphy). Zur Vorhersage wird der Einfuss einzelner Variablen bzw. Features auf die Ausgangsvariable untersucht. Folglich wurden den Audiodaten zunächst Features extrahiert. Zu diesen Features zählen u.a. Root Mean Square Error, Chroma, Spectral Centroid, Zero Crossing Rate und Mel Frequency Cepstral Coefficients. Das Vorgehen lehnt sich an einen Ansatz zur Vorhersage von Wetterdaten an (Tensorflow Time-series). Analog zu den Wetterdaten können die wellenförmigen Audiodaten zunächst aufbereitet und sowohl für Single-step als auch für Multi-step Modelle genutzt werden.  
+Der Ansatz wurde verworfen, da aus Challenge 2 die Anforderung hervorgeht, dass bestehende Samples wiederverwendet werden sollen. Der Ansatz eignet sich demnach nicht zur Lösung, da dieser neue Samples kreieren würde. 
+
+
+<h3>Quellen</h3>
+
+* Buxmann, P. und Schmitt, H. (2019), Künstliche Intelligenz – Mit Algorithmen zum wirtschaftlichen Erfolg, Darmstadt 2019
+* Marsland, S. (2015), Machine Learning – An Algorithmic Perspective, 2. Auflage, Boca Raton, 2015
+* Murphy, K. P. (2012), Machine Learning – A Probabilistic Perspective, Cambridge 2012
+* Tensorflow Time-series (https://www.tensorflow.org/tutorials/structured_data/time_series)
+* Heaton, J., Artificial Intelligence for Humans, Volume 3: Neural Networks and Deep Learning, 2015
 * musicinformationretrieval.com
 * https://www.statworx.com/content-hub/blog/einfuehrung-tensorflow/
 * http://www.deeplearningbook.org
 * https://openai.com/blog/jukebox/
 * https://magenta.tensorflow.org/
 * https://github.com/librosa/librosa
-
-Regression vs. Klassifizierung 
-* Regression: Bei der Regression soll eine kontinuierliche Zielvariable, also unbekannte Werte, vorhergesagt werden (2)(3). 
-* Klassifizierung: 
-
-Feed-forward vs. rekursive Netze
-* Feed-forward Netze
-    * Cnn 
-	Musikstücke & Label nach genre
-	Ungehobelte samples aus den Genres
-	Neuronales netz sollen ungelabelten klassifiziert werden
-* Rekursive Netze
-    * Lstm
-
-Supervised vs. unsupervised Training
-* Supervised:
-    * der ideale Ausgabewert ist spezifiziert 
-* Unsupervised:
-    * Keine idealen Ausgabewerte vorgegeben
-    * Das neuronale Netz lernt es die Eingabedaten in eine Reihe von Gruppen einzuordnen, die durch die Ausgabe Neuronen definiert sind (5)
-
-
-1) Buxmann, P. und Schmitt, H. (2019), Künstliche Intelligenz – Mit Algorithmen zum wirtschaftlichen Erfolg, Darmstadt 2019
-2) Marsland, S. (2015), Machine Learning – An Algorithmic Perspective, 2. Auflage, Boca Raton, 2015
-3) Murphy, K. P. (2012), Machine Learning – A Probabilistic Perspective, Cambridge 2012
-4) https://www.tensorflow.org/tutorials/structured_data/time_series
-5) https://p300.zlibcdn.com/dtoken/a42592737c52e134a610d6a57cf4e039/Artificial%20Intelligence%20for%20Humans%2C%20Volume%203%20Deep%20Learning%20and%20Neural%20Networks%20%28Jeff%20Heaton%29%20%28z-lib.org%29.pdf
-
-
-<h3>Challenge 1</h3> 
-
-
-
-<h3>Challenge 2</h3> 
-
-<h3>Verfolgte Ansätze</h3> 
-* Zeitreihen-Vorhersage (Regression)
-Im ersten Ansatz wurde (auf Empfehlung) eine Zeitreihen-Vorhersage mittels Regression verfolgt. Bei der Regression soll eine kontinuierliche Zielvariable, also unbekannte Werte, vorhergesagt werden (2)(3). Zur Vorhersage wird der Einfuss einzelner Variablen bzw. Features auf die Ausgangsvariable untersucht. Folglich wurden den Audiodaten zunächst Features extrahiert. Zu diesen Features zählen u.a. Root Mean Square Error, Chroma, Spectral Centroid, Zero Crossing Rate und Mel Frequency Cepstral Coefficients. Das Vorgehen lehnt sich an einen Ansatz zur Vorhersage von Wetterdaten an (4). Analog zu den Wetterdaten können die wellenförmigen Audiodaten zunächst aufbereitet und sowohl für Single-step als auch für Multi-step Modelle genutzt werden.  
-Der Ansatz wurde verworfen, da aus Challenge 2 die Anforderung hervorgeht, dass bestehende Samples wiederverwendet werden sollen. Der Ansatz eignet sich demnach nicht zur Lösung, da dieser neue Samples kreieren würde. 

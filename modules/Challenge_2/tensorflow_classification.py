@@ -19,7 +19,10 @@ from datetime import datetime
 import AudioUtil
 import buildModel
 
-#%%
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+tf.config.list_physical_devices()
+
+
 # Label Parameter
 N_CLASSES = 25 # CHANGE HERE, total number of classes
 
@@ -33,91 +36,64 @@ labels = []
 
 df_test = pd.read_csv(train_file, index_col=0)
 df_test
-#%%
+
 #load waveform from samples with filePath
 extracted_waveform=[]
 for index_num,row in df_test.iterrows():
     file_name = row['filePath']
-    file_name = file_name.replace('Sascha', 'sasch')
+    #file_name = file_name.replace('sasch', 'Sascha')
     class_label = row["label"]
-    data, sr = librosa.load(file_name, mono=True)
-    extracted_waveform.append([data,class_label])
+    length = librosa.get_duration(filename=file_name)
+    data, sr = librosa.load(file_name, mono=True, offset=length-1.0)
+    if len(data) == 22050:
+        extracted_waveform.append([data,class_label])
 
 extracted_waveform
 
-#%%
+
 #create df from extracted waveform and label
 extracted_df=pd.DataFrame(extracted_waveform,columns=['waveform','class'])
 extracted_df.head(10)
-extracted_df = extracted_df.drop(extracted_df[extracted_df['waveform'].map(len) < 176400].index)
+#extracted_df = extracted_df.drop(extracted_df[extracted_df['waveform'].map(len) < 176400].index)
 
-extracted_df
+extracted_df.shape
 
-#%%
+for row in extracted_df.iterrows():
+    print(str(len(row[1].waveform)))
+
 #split into waveform and label
 X=np.array(extracted_df['waveform'].tolist(), dtype='float32')
 #X=np.array(X).astype("float32")
 y=np.array(extracted_df['class'].tolist())
 
 
-#%%
 #encode labels
 labelencoder=LabelEncoder()
 y=to_categorical(labelencoder.fit_transform(y))
 
-# %%
-#we dont need to split, separate training and validation data
+#we dont split, separate training and validation data
 #from sklearn.model_selection import train_test_split
 #X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=0)
 X_train = X
 y_train = y
 
 num_labels=y.shape[1]
-#%%
 #X_train = X_train.reshape(-1, 176400, 1)
-#X_train.shape
 
-#%%
+
+X_train.shape
 #y_train.shape
-
-#build model
-#model=Sequential()
-###first layer
-#model.add(Dense(100,input_shape=(176400,)))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###second layer
-#model.add(Dense(200))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###third layer
-#model.add(Dense(100))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###fourth layer
-#model.add(Dense(200))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-###fifth layer
-#model.add(Dense(100))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-
-###final layer
-#model.add(Dense(num_labels))
-#model.add(Activation('softmax'))
-
-#model.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer='adam')
 
 #%%
 #train model with training dataset 
 #samples are labeld in order of the song they belong to
-
-model = buildModel.firstModel(num_labels)
+import buildModel
+#model = buildModel.firstModel(num_labels)
 #model = buildModel.cnnModel()
+model = buildModel.model_Gruppe4(num_labels)
 
-num_epochs = 1000
-num_batch_size = 390
+num_epochs = 20
+num_batch_size = 30
 
 checkpointer = ModelCheckpoint(filepath='saved_models/audio_classification.hdf5', 
                                verbose=1, save_best_only=True)
@@ -142,7 +118,6 @@ print("Training completed in time: ", duration)
 #predict label for each sample
 #sort samples asc on predicted labels
 #put samples in predicted order together and export
-
 #test on song
 one_song = pd.read_csv('data/csv/one_song.csv', index_col=0)
 one_song
@@ -154,7 +129,8 @@ pred = []
 for row in one_song.iterrows():
     if count < len(one_song):
         validate_path = row[1].filePath
-        audio, sample_rate = librosa.load(validate_path, mono=True)
+        validate_path = validate_path.replace('sasch', 'Sascha')
+        audio, sample_rate = librosa.load(validate_path, mono=True, duration=1)
         audio = np.array(audio).reshape (1,-1)
         predicted_label=model.predict(audio)
         #print(predicted_label)
@@ -174,10 +150,9 @@ one_song = one_song.sort_values('pred')
 #export predicted sample order to wav-file
 #one_song.to_csv('new_samples_csv/test2.csv')
 savePath = 'data/tracks_export/'
-exportNr = 3
+exportNr = 5
 saveName = 'rebuild_song' + str(exportNr) + '.wav'
 
 AudioUtil.buildTrack(one_song, savePath, saveName)
-
 
 # %%
