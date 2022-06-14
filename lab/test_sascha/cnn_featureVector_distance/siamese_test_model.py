@@ -7,11 +7,6 @@ import os, sys
 import tensorflow as tf
 from keras.utils.vis_utils import plot_model
 
-
-
-
-
-
 # Train autoencoder and save encoder model and encodings
 def train_color_encoder(X1, X2, y) :
     # Color Encoder
@@ -40,8 +35,9 @@ def train_color_encoder(X1, X2, y) :
 
     # Dot product layer
     dot_product = dot([left_model, right_model], axes=1, normalize=False)
+    output_layer = Dense(1, activation="sigmoid")
 
-    siamese_model = Model(inputs=[input1, input2], outputs=dot_product)
+    siamese_model = Model(inputs=[input1, input2], outputs=output_layer)
 
     # Model summary 
     print(siamese_model.summary())

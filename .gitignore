@@ -2,3 +2,4 @@
 ../AudioData/AudioDataSamples/*
 ../AudioData/AudioData.wav
 .DS*
+lab/test_sascha/classification_cnn/saved_models/*
