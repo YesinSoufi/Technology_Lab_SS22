@@ -13,8 +13,8 @@ import cv2
 #vali_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B'
 #samples_data = 'placeholder filepath'
 batch_size = 5
-epochs = 100
-model_name = 'autoEncoder1_sl_5_100'
+epochs = 20
+model_name = 'autoEncoder2_sl_5_100'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
@@ -39,9 +39,8 @@ for file in Path(specsPath_vali).glob('*.png'):
 train = np.asarray(train)
 vali = np.asarray(vali)
 
-model, enco, deco = ModelUtil.autoEncoder1()
+model, enco, deco = ModelUtil.autoEncoder2()
 model.summary()
-#model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
 #%%
 enco.summary()
