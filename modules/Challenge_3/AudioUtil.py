@@ -61,8 +61,8 @@ def loadWaveform(filePath):
     extracted_sampleRate = []
     length = librosa.get_duration(filename=filePath)
     data, sr = librosa.load(filePath, mono=True, offset=length-1.0)
-    extracted_waveForm.append(data)
-    extracted_sampleRate.append(sr)
+    #extracted_waveForm.append(data)
+    #extracted_sampleRate.append(sr)
 
     #return extracted_waveForm, extracted_sampleRate
     return data, sr
@@ -78,14 +78,13 @@ def buildTrack(df_samples, savePath, saveName):
     combined.export(savePath + saveName, format="wav")
     print('exported new song: ' + savePath+saveName)
 
-def cutSamples(myAudioPath, savePath, sampleLength, nameStartID,overlap = 0):
+def cutSamples(myAudioPath, savePath, sampleLength, name, overlap = 0):
     print(myAudioPath)
     myaudio = AudioSegment.from_file(myAudioPath)
     chunk_length_ms = sampleLength*1000 # pydub calculates in millisec
     chunks = make_chunks(myaudio,chunk_length_ms) #Make chunks of one sec 
-    num = 0
     for i, chunk in enumerate(chunks): 
-        chunk_name = str(i+1) + '.wav' 
+        chunk_name = str(i+1) + name + '.wav' 
         chunk.export(savePath + chunk_name, format='wav')
     
     del myaudio
