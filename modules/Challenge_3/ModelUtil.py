@@ -1,10 +1,12 @@
+#%%
 from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.callbacks import ModelCheckpoint
-from tensorflow.keras import losses
+from keras.models import Sequential
+from keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose
+from keras.optimizers import Adam
+from keras.callbacks import ModelCheckpoint
+from keras import losses
 from datetime import datetime
+#%%
 
 def predictSimilarity(sample_array, model):
     prediction = model.predict(sample_array)
