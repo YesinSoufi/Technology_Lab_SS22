@@ -8,8 +8,6 @@ from glob import glob
 import IPython.display as ipd
 from pydub import AudioSegment
 from pydub.utils import make_chunks
-import shutil
-import random
 from pathlib import Path
 from pyparsing import col
 import librosa
@@ -60,7 +58,7 @@ def loadWaveform(filePath):
     extracted_waveForm = []
     extracted_sampleRate = []
     length = librosa.get_duration(filename=filePath)
-    data, sr = librosa.load(filePath, mono=True, offset=length-1.0)
+    data, sr = librosa.load(filePath, mono=True)
     #extracted_waveForm.append(data)
     #extracted_sampleRate.append(sr)
 
