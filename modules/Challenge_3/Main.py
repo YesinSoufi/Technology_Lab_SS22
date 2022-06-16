@@ -14,7 +14,7 @@ import cv2
 #samples_data = 'placeholder filepath'
 batch_size = 5
 epochs = 20
-model_name = 'autoEncoder2_sl_5_100'
+model_name = 'autoEncoder2_sl_5_20'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
@@ -79,6 +79,9 @@ cv2.imshow('Test1!', test_img[0,...])
 cv2.waitKey(0)
 cv2.destroyAllWindows() 
 cv2.waitKey(1)
+
+
+
 
 #-----------------------------------------#
 # Old-Code and Tests

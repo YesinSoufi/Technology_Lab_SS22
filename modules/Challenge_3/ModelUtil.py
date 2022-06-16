@@ -1,6 +1,6 @@
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose
+from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose, Conv1DTranspose
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras import losses
@@ -116,12 +116,10 @@ def autoEncoder2():
         Conv2D(32, (3,3), activation='relu', padding='same', strides=2),
         Conv2D(16, (3,3), activation='relu', padding='same', strides=2),
         Conv2D(8, (3, 3), activation='relu', padding='same', strides=2),
-        Conv2D(4, (3,3), activation='relu', padding='same', strides=2),
-        Flatten()
+        Conv2D(4, (3,3), activation='relu', padding='same', strides=2)
     ])
 
     conv_decoder = Sequential([
-        Reshape([8,8,4]),
         Conv2DTranspose(4, kernel_size=3, strides=2, activation='relu', padding='same'),
         Conv2DTranspose(8, kernel_size=3, strides=2, activation='relu', padding='same'),
         Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
@@ -132,7 +130,34 @@ def autoEncoder2():
 
     conv_ae = Sequential([conv_encoder, conv_decoder])
 
-    opt = Adam(learning_rate=0.0005)
+    opt = Adam(learning_rate=0.010)
+    conv_ae.compile(optimizer=opt, loss="binary_crossentropy")
+    #conv_ae.compile(optimizer='adam', loss="binary_crossentropy")
+    
+
+    return conv_ae, conv_encoder, conv_decoder
+
+def autoEncoder3():
+    conv_encoder = Sequential([
+        Conv2D(64, (3, 3), activation='relu', padding='same', strides=2, input_shape=(256,256,3)),
+        Conv2D(32, (3,3), activation='relu', padding='same', strides=2),
+        Conv2D(16, (3,3), activation='relu', padding='same', strides=2),
+        Conv2D(8, (3, 3), activation='relu', padding='same', strides=2),
+        Conv2D(4, (3,3), activation='relu', padding='same', strides=2)
+    ])
+
+    conv_decoder = Sequential([
+        Conv2DTranspose(4, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(8, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(32, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(64, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2D(3, kernel_size=(3, 3), activation='relu', padding='same')
+    ])
+
+    conv_ae = Sequential([conv_encoder, conv_decoder])
+
+    opt = Adam(learning_rate=0.1)
     conv_ae.compile(optimizer=opt, loss="binary_crossentropy")
     #conv_ae.compile(optimizer='adam', loss="binary_crossentropy")
     
