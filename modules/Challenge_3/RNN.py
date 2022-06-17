@@ -90,17 +90,93 @@ for row in df_samples.itertuples():
 
 print(name)
 print('export non-matching pairs csv')  
-#df_wrong_match.to_csv('C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/' + name + '_wrong_match.csv', index=False)
 df_wrong_match.to_csv('C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/' + name + '_wrong_match.csv', index=False)
 
 #%%
-df_match_wrong = pd.DataFrame(columns = ['training_waveform'])
-#df_match_wrong['training_waveform'] = df_samples['waveform'] + df_samples['waveform'].shift(-20)
-df_match_wrong['training_waveform'] = df_samples['waveform'] + np.roll(df_samples['waveform'], 20)
-df_match_wrong['label'] = 0
-df_match_wrong = df_match_wrong[:18]
+#----------------------------------#
+# Normalization Code               #
+#----------------------------------#
+import pandas as pd
+from ast import literal_eval
+import numpy as np
 
-df_match_wrong
+csv_file = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
+
+df_to_norm = pd.read_csv(csv_file)
+df_to_norm['training_waveform'] = df_to_norm['training_waveform'].apply(literal_eval)
+
+df_to_norm['norm'] = df_to_norm['training_waveform'].apply(lambda x: x/np.abs(x).max())
+df_to_norm
+
+
+#%%
+#--------------------------------#
+# Test CNN of CRNN               #
+#--------------------------------#
+
+import pandas as pd
+from ast import literal_eval
+import numpy as np
+
+matchingSamples = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
+nonMatchingSamples = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
+
+df_matching = pd.read_csv(matchingSamples)
+df_matching['training_waveform'] = df_matching['training_waveform'].apply(literal_eval)
+#df_matching['training_waveform'] = df_matching['training_waveform'].apply(lambda x: x/np.abs(x).max())
+
+df_nonMatching = pd.read_csv(nonMatchingSamples, usecols=['training_waveform', 'label'])
+df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(literal_eval)
+#df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(lambda x: x/np.abs(x).max())
+
+df_training_data = pd.concat([df_matching,df_nonMatching], axis=0, sort=False)
+df_training_data.reset_index(inplace=True, drop=True)
+df_training_data['training_waveform'] = df_training_data['training_waveform'].apply(lambda x: x/np.abs(x).max())
+
+
+df_training_data
+
+#%%
+#shuffle and split data into training and validation
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(df_training_data['training_waveform'], df_training_data['label'], test_size=0.2, random_state=42)
+
+#%%
+#compile model
+print('import') 
+import ModelUtilCRNN
+
+print('compile')
+model = ModelUtilCRNN.cRNN_Prototyp(len(X_train[1]))
+
+#%%
+X_train = np.stack(X_train.values).astype(np.float32)
+#%%
+y_train = np.stack(y_train.values).astype(int)
+
+#%%
+X_train[1]
+
+#%%
+model.summary()
+
+#%%
+#train and save model
+batch = 5
+epoch = 10
+model_name = 'cRNN_prototyp_CNN_Layers'
+
+model.fit(X_train, y_train, batch, epochs=epoch,
+                      validation_split=0.3,
+                      steps_per_epoch=100)
+model.save('saved_models/' + model_name)
+
 # %%
-df_match_wrong['training_waveform'][2]
-# %%
+#shuffle training_data
+#not needed because of train_test_split from sklearn
+from sklearn.utils import shuffle
+
+df_training_data = shuffle(df_training_data)
+df_training_data.reset_index(inplace=True, drop=True)
+df_training_data

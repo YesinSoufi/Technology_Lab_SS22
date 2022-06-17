@@ -56,7 +56,6 @@ model.save('saved_models/' + model_name)
 
 #%%
 test_img = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
-#test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
 test_img = cv2.resize(test_img, (256, 256), interpolation = cv2.INTER_AREA)
 test_img = test_img / 255
 test_img = test_img.reshape(1,256,256,3)
@@ -73,8 +72,6 @@ cv2.waitKey(1)
 
 
 #%%
-#test = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
-#test = cv2.resize(test, (256, 256), interpolation = cv2.INTER_AREA)
 cv2.imshow('Test1!', test_img[0,...]) 
 cv2.waitKey(0)
 cv2.destroyAllWindows() 

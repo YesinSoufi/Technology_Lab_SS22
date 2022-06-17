@@ -6,7 +6,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras import losses
 from datetime import datetime
 
-def predictSimilarity(sample_array, model):
+def predictionMethod(sample_array, model):
     prediction = model.predict(sample_array)
     return prediction
 
@@ -25,6 +25,23 @@ def trainModel(epochs, batch_size, model, data):
 #-----------------------------------#
 #   NN-Models
 #-----------------------------------#
+def cRNN_Prototyp(shape):
+    model = Sequential()
+
+    model.add(Conv1D(256, 3, activation='relu', input_shape=(shape,1)))
+    model.add(MaxPooling1D(3))
+    model.add(Conv1D(1024, 3, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(MaxPooling1D(2))
+    model.add(Flatten())
+    model.add(Dense(50, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
+
+    model.compile(loss='categorical_crossentropy', metrics=['accuracy'])
+
+    return model
+
+
 def cnnTest():
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1', 
