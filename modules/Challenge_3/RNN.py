@@ -70,10 +70,11 @@ df_match_samples_2.to_csv('C:/Users/Sascha/Music/Techlab_Music/samples_3sec/trai
 
 # %%
 #create labeled wrong samples
-name = 'cherry'
+name = 'TwirlingTwins'
 
 print('load file')
-csv = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/' + name + '.csv'
+#csv = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/' + name + '.csv'
+csv = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/' + name + '.csv'
 df_samples = pd.read_csv(csv)
 df_samples['waveform'] = df_samples['waveform'].apply(literal_eval)
 
@@ -81,7 +82,7 @@ print('create non matching pairs')
 df_wrong_match = pd.DataFrame(columns=['name', 'training_waveform', 'label'])
 for row in df_samples.itertuples():
     index = 13
-    for _ in range(18):
+    for _ in range(5):
         training_waveform = row.waveform + df_samples.iloc[index]['waveform']
         new_row = {'name':row.name, 'training_waveform': training_waveform, 'label':0}
         df_wrong_match = df_wrong_match.append(new_row, ignore_index=True)
@@ -89,8 +90,8 @@ for row in df_samples.itertuples():
 
 print(name)
 print('export non-matching pairs csv')  
-df_wrong_match.to_csv('C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/' + name + '_wrong_match.csv', index=False)
-
+#df_wrong_match.to_csv('C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/' + name + '_wrong_match.csv', index=False)
+df_wrong_match.to_csv('C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/' + name + '_wrong_match.csv', index=False)
 
 #%%
 df_match_wrong = pd.DataFrame(columns = ['training_waveform'])
