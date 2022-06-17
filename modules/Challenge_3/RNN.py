@@ -168,8 +168,7 @@ epoch = 10
 model_name = 'cRNN_prototyp_CNN_Layers'
 
 model.fit(X_train, y_train, batch, epochs=epoch,
-                      validation_split=0.3,
-                      steps_per_epoch=100)
+                      validation_split=0.3)
 model.save('saved_models/' + model_name)
 
 # %%
