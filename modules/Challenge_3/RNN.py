@@ -118,8 +118,8 @@ import pandas as pd
 from ast import literal_eval
 import numpy as np
 
-matchingSamples = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
-nonMatchingSamples = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
+matchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
+nonMatchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
 
 df_matching = pd.read_csv(matchingSamples)
 df_matching['training_waveform'] = df_matching['training_waveform'].apply(literal_eval)
@@ -131,7 +131,7 @@ df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(
 
 df_training_data = pd.concat([df_matching,df_nonMatching], axis=0, sort=False)
 df_training_data.reset_index(inplace=True, drop=True)
-df_training_data['training_waveform'] = df_training_data['training_waveform'].apply(lambda x: x/np.abs(x).max())
+#df_training_data['training_waveform'] = df_training_data['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
 
 df_training_data
@@ -148,10 +148,15 @@ print('import')
 import ModelUtilCRNN
 
 print('compile')
-model = ModelUtilCRNN.cRNN_Prototyp(len(X_train[1]))
+model = ModelUtilCRNN.cRNN_Prototyp()
+
+
+#%%
+type(X_train[1])
 
 #%%
 X_train = np.stack(X_train.values).astype(np.float32)
+#X_train = X_train.to_numpy(dtype=np.float32)
 #%%
 y_train = np.stack(y_train.values).astype(int)
 
