@@ -111,15 +111,19 @@ df_to_norm
 
 #%%
 #--------------------------------#
-# Test CNN of CRNN               #
+# Test CNN of CRNN               # 
+# Ab hier ausführen              #
 #--------------------------------#
 
 import pandas as pd
 from ast import literal_eval
 import numpy as np
 
-matchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
-nonMatchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
+#matchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
+#nonMatchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
+
+matchingSamples = 'training_data/2sec_burble_next_match.csv'
+nonMatchingSamples = 'training_data/2sec_burble_wrong_match.csv'
 
 df_matching = pd.read_csv(matchingSamples)
 df_matching['training_waveform'] = df_matching['training_waveform'].apply(literal_eval)
@@ -133,7 +137,6 @@ df_training_data = pd.concat([df_matching,df_nonMatching], axis=0, sort=False)
 df_training_data.reset_index(inplace=True, drop=True)
 #df_training_data['training_waveform'] = df_training_data['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
-
 df_training_data
 
 #%%
@@ -142,6 +145,10 @@ from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(df_training_data['training_waveform'], df_training_data['label'], test_size=0.2, random_state=42)
 
+X_train = np.stack(X_train.values).astype(np.float32)
+y_train = np.stack(y_train.values).astype(int)
+y_train = np.reshape(y_train, (-1, 1))
+
 #%%
 #compile model
 print('import') 
@@ -149,38 +156,23 @@ import ModelUtilCRNN
 
 print('compile')
 model = ModelUtilCRNN.cRNN_Prototyp()
-
-
-#%%
-type(X_train[1])
-
-#%%
-X_train = np.stack(X_train.values).astype(np.float32)
-#X_train = X_train.to_numpy(dtype=np.float32)
-#%%
-y_train = np.stack(y_train.values).astype(int)
-
-#%%
-X_train[1]
-
-#%%
 model.summary()
 
 #%%
 #train and save model
 batch = 5
 epoch = 10
-model_name = 'cRNN_prototyp_CNN_Layers'
+model_name = 'cRNN_prototyp_CNN_Layers_2'
 
 model.fit(X_train, y_train, batch, epochs=epoch,
-                      validation_split=0.3)
+                      validation_split=0.2)
 model.save('saved_models/' + model_name)
 
-# %%
-#shuffle training_data
-#not needed because of train_test_split from sklearn
-from sklearn.utils import shuffle
+#%%
+model.evaluate(X_train, y_train)
 
-df_training_data = shuffle(df_training_data)
-df_training_data.reset_index(inplace=True, drop=True)
-df_training_data
+#%%
+X_test = np.stack(X_test.values).astype(np.float32)
+y_test = np.stack(y_test.values).astype(int)
+y_test = np.reshape(y_test, (-1, 1))
+model.evaluate(X_test, y_test)
