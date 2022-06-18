@@ -1,12 +1,12 @@
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose
+from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose, Conv1DTranspose
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras import losses
 from datetime import datetime
 
-def predictSimilarity(sample_array, model):
+def predictionMethod(sample_array, model):
     prediction = model.predict(sample_array)
     return prediction
 
@@ -25,6 +25,23 @@ def trainModel(epochs, batch_size, model, data):
 #-----------------------------------#
 #   NN-Models
 #-----------------------------------#
+def cRNN_Prototyp(shape):
+    model = Sequential()
+
+    model.add(Conv1D(256, 3, activation='relu', input_shape=(shape,1)))
+    model.add(MaxPooling1D(3))
+    model.add(Conv1D(1024, 3, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(MaxPooling1D(2))
+    model.add(Flatten())
+    model.add(Dense(50, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
+
+    model.compile(loss='categorical_crossentropy', metrics=['accuracy'])
+
+    return model
+
+
 def cnnTest():
     model = Sequential()
     model.add(Conv2D(32, (3, 3), activation='relu', padding='same', name='conv_1', 
@@ -116,12 +133,10 @@ def autoEncoder2():
         Conv2D(32, (3,3), activation='relu', padding='same', strides=2),
         Conv2D(16, (3,3), activation='relu', padding='same', strides=2),
         Conv2D(8, (3, 3), activation='relu', padding='same', strides=2),
-        Conv2D(4, (3,3), activation='relu', padding='same', strides=2),
-        Flatten()
+        Conv2D(4, (3,3), activation='relu', padding='same', strides=2)
     ])
 
     conv_decoder = Sequential([
-        Reshape([8,8,4]),
         Conv2DTranspose(4, kernel_size=3, strides=2, activation='relu', padding='same'),
         Conv2DTranspose(8, kernel_size=3, strides=2, activation='relu', padding='same'),
         Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
@@ -132,7 +147,34 @@ def autoEncoder2():
 
     conv_ae = Sequential([conv_encoder, conv_decoder])
 
-    opt = Adam(learning_rate=0.0005)
+    opt = Adam(learning_rate=0.010)
+    conv_ae.compile(optimizer=opt, loss="binary_crossentropy")
+    #conv_ae.compile(optimizer='adam', loss="binary_crossentropy")
+    
+
+    return conv_ae, conv_encoder, conv_decoder
+
+def autoEncoder3():
+    conv_encoder = Sequential([
+        Conv2D(64, (3, 3), activation='relu', padding='same', strides=2, input_shape=(256,256,3)),
+        Conv2D(32, (3,3), activation='relu', padding='same', strides=2),
+        Conv2D(16, (3,3), activation='relu', padding='same', strides=2),
+        Conv2D(8, (3, 3), activation='relu', padding='same', strides=2),
+        Conv2D(4, (3,3), activation='relu', padding='same', strides=2)
+    ])
+
+    conv_decoder = Sequential([
+        Conv2DTranspose(4, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(8, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(16, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(32, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2DTranspose(64, kernel_size=3, strides=2, activation='relu', padding='same'),
+        Conv2D(3, kernel_size=(3, 3), activation='relu', padding='same')
+    ])
+
+    conv_ae = Sequential([conv_encoder, conv_decoder])
+
+    opt = Adam(learning_rate=0.1)
     conv_ae.compile(optimizer=opt, loss="binary_crossentropy")
     #conv_ae.compile(optimizer='adam', loss="binary_crossentropy")
     
