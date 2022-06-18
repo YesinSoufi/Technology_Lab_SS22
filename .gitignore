@@ -3,3 +3,4 @@ AudioData/AudioDataSamples/*
 AudioData/AudioData.wav
 .DS*
 lab/test_sascha/classification_cnn/saved_models/*
+modules/Challenge_3/training_data/2sec_burble_wrong_match.csv

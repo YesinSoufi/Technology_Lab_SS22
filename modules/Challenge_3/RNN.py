@@ -118,6 +118,7 @@ df_to_norm
 import pandas as pd
 from ast import literal_eval
 import numpy as np
+from sklearn.model_selection import train_test_split
 
 #matchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_next_match.csv'
 #nonMatchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
@@ -141,7 +142,6 @@ df_training_data
 
 #%%
 #shuffle and split data into training and validation
-from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(df_training_data['training_waveform'], df_training_data['label'], test_size=0.2, random_state=42)
 
@@ -162,7 +162,7 @@ model.summary()
 #train and save model
 batch = 5
 epoch = 10
-model_name = 'cRNN_prototyp_CNN_Layers_2'
+model_name = 'SL_cRNN_prototyp_CNN_Layers_2'
 
 model.fit(X_train, y_train, batch, epochs=epoch,
                       validation_split=0.2)
