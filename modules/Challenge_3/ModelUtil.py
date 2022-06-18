@@ -1,7 +1,7 @@
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Input, Cropping2D, Conv1D, Reshape, MaxPooling1D, Dense,Dropout,Activation,Flatten, Conv2D, MaxPooling2D, MaxPool2D, Conv2DTranspose
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras import losses
 from datetime import datetime
@@ -132,7 +132,7 @@ def autoEncoder2():
 
     conv_ae = Sequential([conv_encoder, conv_decoder])
 
-    opt = Adam(learning_rate=0.0005)
+    opt = Adam(learning_rate=0.0015)
     conv_ae.compile(optimizer=opt, loss="binary_crossentropy")
     #conv_ae.compile(optimizer='adam', loss="binary_crossentropy")
     

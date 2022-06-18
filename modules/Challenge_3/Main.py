@@ -12,9 +12,9 @@ import cv2
 #training_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_A'
 #vali_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B'
 #samples_data = 'placeholder filepath'
-batch_size = 5
-epochs = 20
-model_name = 'autoEncoder2_sl_5_100'
+batch_size = 10
+epochs = 30
+model_name = 'autoEncoderTest_ok_5_30'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
@@ -51,7 +51,7 @@ deco.summary()
 #%%
 #train the model
 model.fit(train, train, batch_size, epochs=epochs,
-                      validation_data=[vali, vali])
+                      validation_data=(vali, vali))
 model.save('saved_models/' + model_name)
 
 #%%
