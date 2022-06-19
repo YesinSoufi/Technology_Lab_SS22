@@ -37,17 +37,22 @@ from sklearn.model_selection import train_test_split
 #nonMatchingSamples = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/training_samples/burble_wrong_match.csv'
 
 matchingSamples = 'training_data/2sec_burble_next_match.csv'
+matching2Samples = 'training_data/2sec_burble_next2_match.csv'
 nonMatchingSamples = 'training_data/2sec_burble_wrong_match.csv'
 
 df_matching = pd.read_csv(matchingSamples)
 df_matching['training_waveform'] = df_matching['training_waveform'].apply(literal_eval)
 #df_matching['training_waveform'] = df_matching['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
+df_matching2 = pd.read_csv(matching2Samples)
+df_matching2['training_waveform'] = df_matching2['training_waveform'].apply(literal_eval)
+#df_matching['training_waveform'] = df_matching['training_waveform'].apply(lambda x: x/np.abs(x).max())
+
 df_nonMatching = pd.read_csv(nonMatchingSamples, usecols=['training_waveform', 'label'])
 df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(literal_eval)
 #df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
-df_training_data = pd.concat([df_matching,df_nonMatching], axis=0, sort=False)
+df_training_data = pd.concat([df_matching,df_nonMatching, df_matching2], axis=0, sort=False)
 df_training_data.reset_index(inplace=True, drop=True)
 #df_training_data['training_waveform'] = df_training_data['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
