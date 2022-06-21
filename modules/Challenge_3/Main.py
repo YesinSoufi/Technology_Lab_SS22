@@ -13,8 +13,8 @@ import cv2
 #vali_data = 'C:/Users/Sascha/Music/Samples/Electronic_3sec/Song_B'
 #samples_data = 'placeholder filepath'
 batch_size = 5
-epochs = 100
-model_name = 'autoEncoderTest1_sl_5_100'
+epochs = 20
+model_name = 'autoEncoder2_sl_5_20'
 #export_song = 'placeholder new song filepath'
 #export_model = 'placeholder trained model filepath'
 
@@ -39,9 +39,8 @@ for file in Path(specsPath_vali).glob('*.png'):
 train = np.asarray(train)
 vali = np.asarray(vali)
 
-model, enco, deco = ModelUtil.autoEncoder1()
+model, enco, deco = ModelUtil.autoEncoder2()
 model.summary()
-#model = ModelUtil.trainModel(batch_size, epochs, model, specs)
 
 #%%
 enco.summary()
@@ -57,7 +56,6 @@ model.save('saved_models/' + model_name)
 
 #%%
 test_img = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
-#test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2RGB)
 test_img = cv2.resize(test_img, (256, 256), interpolation = cv2.INTER_AREA)
 test_img = test_img / 255
 test_img = test_img.reshape(1,256,256,3)
@@ -74,12 +72,13 @@ cv2.waitKey(1)
 
 
 #%%
-#test = cv2.imread('Mel_Spec/Vali_Spec/25_spec.png')
-#test = cv2.resize(test, (256, 256), interpolation = cv2.INTER_AREA)
 cv2.imshow('Test1!', test_img[0,...]) 
 cv2.waitKey(0)
 cv2.destroyAllWindows() 
 cv2.waitKey(1)
+
+
+
 
 #-----------------------------------------#
 # Old-Code and Tests
