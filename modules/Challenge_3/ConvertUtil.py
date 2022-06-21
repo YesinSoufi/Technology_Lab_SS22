@@ -63,8 +63,8 @@ len(df_temp['training_waveform'][1])
 #   Export to new file                    #
 #-----------------------------------------#
 
-song1 = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/burble.csv'
-song2 = 'C:/Users/Sascha/Music/Techlab_Music/samples_3sec/Century.csv'
+song1 = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/burble.csv'
+song2 = 'C:/Users/sasch/Music/Techlab_Music/samples_3sec/Century.csv'
 
 df_lofi = pd.read_csv(song1)
 df_jazz = pd.read_csv(song2)
@@ -77,21 +77,19 @@ df_jazz['waveform'] = df_jazz['waveform'].apply(literal_eval)
 #df_wrong_samples['label'] = 0
 #df_wrong_samples
 
-#%%
-new_matches = []
-for row in df_lofi.itertuples():
-    temp = row.waveform + df_jazz.iloc[row.index, 0]
-    temp = temp[44099:88199]
-    #print(type(row.training_waveform))
-    new_matches.append(temp)
+df_lofi['wrong_match'] = df_lofi['waveform'] + df_jazz['waveform']
+df_lofi['wrong_match'] = df_lofi['wrong_match'].apply(lambda x: x[44099:88199])
 
-#df_new_matches = pd.DataFrame({'training_waveform':new_matches})
-#df_new_matches['label'] = 0
-#df_new_matches
-
+df_lofi
 #%%
+df_lofi['label'] = 0
+df_lofi
+# %%
+df_wrong_samples = df_lofi[['wrong_match', 'label']].copy()
+df_wrong_samples.rename(columns = {'wrong_match': 'training_waveform'}, inplace = True)
 df_wrong_samples
 
+#%%
+save='training_data/'
+df_wrong_samples.to_csv(save + 'NEW_WRONG_SAMPLES.csv', index=False)
 # %%
-save='C:/Users/Sascha/Music/Techlab_Music/samples_3sec/training_samples/'
-df_wrong_samples.to_csv(save + 'wrong_samples.csv', index=False)
