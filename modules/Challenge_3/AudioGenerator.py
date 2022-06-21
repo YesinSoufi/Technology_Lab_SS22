@@ -1,5 +1,6 @@
 #%%
 from ast import literal_eval
+from tracemalloc import start
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -14,25 +15,10 @@ exportDir = 'New_Songs/'
 startSample = 'Samples_WAV/Runner/1Runner.wav'
 songLength = 10
 
-#%%
-#load model for prediction
-#load samples into df
-    #load csv?
-    #load wav into waveform?
+#######################################################
+#   Change df_test to df_samples after completion!!!
+#######################################################
 
-#set start sample
-#loop:
-    #take one samples form list
-    #append samples to startsample
-    #get prediction from model
-    #save prediction to sample id into list
-    #repeat for alle possible samples
-
-#safe best possible sample into list
-#set best possible sample as next sample
-#repeat loop until N samples are appended
-
-#load samples from new song-list and append export es one wav file
 
 #%%
 #load model
@@ -41,7 +27,9 @@ model.summary()
 
 #load start sample
 startS, _ = AudioUtil.loadWaveform(startSample)
+startS = startS.astype(np.float32)
 len(startS)
+
 
 #%%
 #load samples to create song
@@ -53,11 +41,51 @@ for file in Path(sampleCSVDir).glob('*.csv'):
     df_samples = pd.concat([df_samples, df_temp], axis=0, sort=False)
 
 del(df_temp)
+df_samples['waveform'] = df_samples['waveform'].apply(lambda x: np.array(x).astype(np.float32))
+df_samples.reset_index(drop=True, inplace=True)
 df_samples
 
 #%%
 currentSample = startS
-predSamples = []
+new_song = []
+
 
 for x in range(songLength):
-    'tbd'
+    df_test = df_samples.copy()
+    df_test['current'] = df_test.apply(lambda x: currentSample, axis=1)
+    pred_samples = []
+    for row in df_test.itertuples():
+        temp = np.concatenate((currentSample, row.waveform))
+        pred_samples.append(temp)
+
+    df_pred_samples = pd.DataFrame({'pred_sample':pred_samples})
+    df_test = df_test.join(df_pred_samples)
+    df_test['pred_sample'] = df_test['pred_sample'].apply(lambda x: x[44099:88199])
+    pred = np.stack(df_test['pred_sample'].values).astype(np.float32)        
+    df_test['prediction'] = model.predict(pred)
+    
+    #select highest prediction
+    #atm many 1 predictions -> workaroung = select first index 
+    output = df_test[df_test.prediction == df_test.prediction.max()]
+
+    #set new current sample
+    currentSample = output.iloc[0,1]
+
+    #set sample into new song
+    #atm sample name will be saved into list
+    new_song.append(output.iloc[0,0])
+
+    #del(df_test)
+    del(df_pred_samples)
+    del(df_test)
+
+    if x == 2:
+        break
+
+#df_test
+
+#%%
+new_song
+
+
+# %%

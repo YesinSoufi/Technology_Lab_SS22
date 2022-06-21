@@ -59,6 +59,7 @@ def loadWaveform(filePath):
     extracted_sampleRate = []
     length = librosa.get_duration(filename=filePath)
     data, sr = librosa.load(filePath, mono=True)
+    data = librosa.util.normalize(data)
     #extracted_waveForm.append(data)
     #extracted_sampleRate.append(sr)
 
