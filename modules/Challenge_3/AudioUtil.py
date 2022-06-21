@@ -66,11 +66,11 @@ def loadWaveform(filePath):
     #return extracted_waveForm, extracted_sampleRate
     return data, sr
 
-def buildTrack(df_samples, savePath, saveName):
+def buildTrack(sampleList, savePath, saveName):
     combined = AudioSegment.empty()
-    for row in df_samples.iterrows():
-        file_path = row[1].filePath
-        file_path = file_path.replace('sasch', 'Sascha')
+    for path in sampleList:
+        file_path = path
+        #file_path = file_path.replace('sasch', 'Sascha')
         temp = AudioSegment.from_file(file_path, format="wav")
         combined = combined + temp
     
