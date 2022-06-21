@@ -13,7 +13,7 @@ sampleCSVDir = 'Samples_CSV/'
 sampleWAVDir = 'Samples_WAV'
 exportDir = 'New_Songs/'
 startSample = 'Samples_WAV/Runner/1Runner.wav'
-songLength = 10
+songLength = 20
 
 #######################################################
 #   Change df_test to df_samples after completion!!!
@@ -48,9 +48,10 @@ df_samples
 #%%
 currentSample = startS
 new_song = []
-
+new_song.append('1Runner')
 
 for x in range(songLength):
+    print('Round: ' + str(x))
     df_test = df_samples.copy()
     df_test['current'] = df_test.apply(lambda x: currentSample, axis=1)
     pred_samples = []
@@ -79,13 +80,8 @@ for x in range(songLength):
     del(df_pred_samples)
     del(df_test)
 
-    if x == 2:
-        break
-
 #df_test
 
 #%%
 new_song
 
-
-# %%
