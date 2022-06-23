@@ -99,11 +99,13 @@ for x in range(songLength):
     # else:
     for row in output.itertuples():
         if row.name not in used_samples:
+            print('inside if-condition')
             currentSample = output.iloc[row.Index,1]
             new_song.append(output.iloc[row.Index,0])
             used_samples.append(output.iloc[row.Index,0])
             break
 
+    break
 
     # if len(new_song) == 1:
     #     currentSample = output.iloc[0,1]
@@ -126,8 +128,8 @@ for x in range(songLength):
     del(df_test)
     print(str(new_song))
     
-
-new_song
+output.head(30)
+#new_song
 
 #%%
 #load filepaths and search for sample name -> if file.stem == sampleName
