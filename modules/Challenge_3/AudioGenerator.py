@@ -14,9 +14,9 @@ modelPath = 'Trained_Model/YS03_cRNN_prototyp_train_all_1'
 sampleCSVDir = 'Samples_CSV/'
 sampleWAVDir = 'Samples_WAV'
 exportDir = 'New_Songs/'
-startSample = 'Samples_WAV/1generatorTwo.wav'
-startSampleName = '1generatorTwo.wav'
-songLength = 10
+startSample = 'Samples_WAV/60generatorTwo.wav'
+startSampleName = '60generatorTwo.wav'
+songLength = 5
 
 
 #######################################################
@@ -61,6 +61,7 @@ new_song = []
 new_song.append(startSampleName)
 
 used_samples = []
+count = 1
 
 for x in range(songLength):
     print('Round: ' + str(x))
@@ -77,11 +78,11 @@ for x in range(songLength):
     #    df_test.drop('pred_samples', axis=1, inplace=True)
     #    #del(df_test['pred_samples'])
     
-    df_test = df_test.join(df_pred_samples)
-    df_test['pred_sample'] = df_test['pred_sample'].apply(lambda x: x[44099:88199])
-    pred = np.stack(df_test['pred_sample'].values).astype(np.float32)        
+    #df_test = df_test.join(df_pred_samples)
+    df_pred_samples['pred_sample'] = df_pred_samples['pred_sample'].apply(lambda x: x[44099:88199])
+    pred = np.stack(df_pred_samples['pred_sample'].values).astype(np.float32)        
     df_test['prediction'] = model.predict(pred)
-    
+
     #select highest prediction
     #atm many 1 predictions -> workaroung = select first index
     #check for duplicate? -> will this start a loop with two samples?
@@ -92,36 +93,17 @@ for x in range(songLength):
     #set sample into new song
     #atm sample name will be saved into list
 
-    # if output.iloc[0,0] not in used_samples:
-    #     currentSample = output.iloc[0,1]
-    #     new_song.append(output.iloc[0,0])
-    #     used_samples.append(output.iloc[0,0])
-    # else:
 
     output.reset_index(inplace=True, drop=True)
-
+    
     for row in output.itertuples():
         if row.name not in used_samples:
             print('inside if-condition')
             currentSample = output.iloc[row.Index,1]
             new_song.append(output.iloc[row.Index,0])
             used_samples.append(output.iloc[row.Index,0])
+            count = count + 1
             break
-
-
-    # if len(new_song) == 1:
-    #     currentSample = output.iloc[0,1]
-    #     new_song.append(output.iloc[0,0])   
-    # elif new_song[-1] == str(output.iloc[0,0]):
-    #     currentSample = output.iloc[1,1]
-    #     new_song.append(output.iloc[1,0])   
-    # elif new_song[-2]:
-    #     if new_song[-2] == str(output.iloc[0,0]):
-    #         currentSample = output.iloc[2,1]
-    #         new_song.append(output.iloc[2,0])   
-    # else:
-    #     currentSample = output.iloc[0,1]
-    #     new_song.append(output.iloc[0,0])
     
     #del(df_test)
     if len(used_samples) == len(df_test['name']):
@@ -130,9 +112,7 @@ for x in range(songLength):
     del(df_test)
     print(str(new_song))
 
-#%%
-output.tail(30)
-#new_song
+
 
 #%%
 #load filepaths and search for sample name -> if file.stem == sampleName
