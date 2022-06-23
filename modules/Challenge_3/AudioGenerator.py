@@ -97,6 +97,9 @@ for x in range(songLength):
     #     new_song.append(output.iloc[0,0])
     #     used_samples.append(output.iloc[0,0])
     # else:
+
+    output.reset_index(inplace=True, drop=True)
+
     for row in output.itertuples():
         if row.name not in used_samples:
             print('inside if-condition')
@@ -105,7 +108,6 @@ for x in range(songLength):
             used_samples.append(output.iloc[row.Index,0])
             break
 
-    break
 
     # if len(new_song) == 1:
     #     currentSample = output.iloc[0,1]
@@ -127,8 +129,9 @@ for x in range(songLength):
     del(df_pred_samples)
     del(df_test)
     print(str(new_song))
-    
-output.head(30)
+
+#%%
+output.tail(30)
 #new_song
 
 #%%
@@ -148,7 +151,7 @@ exportPaths
 #%%
 #export to new song
 print("Exporting new Song!")
-name = 'ersterSong21062022.wav'
+name = 'zweiterSong21062022.wav'
 
 AudioUtil.buildTrack(exportPaths, exportDir, name)
 
