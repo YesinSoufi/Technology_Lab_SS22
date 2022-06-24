@@ -14,8 +14,8 @@ modelPath = 'Trained_Model/YS03_cRNN_prototyp_train_all_1'
 sampleCSVDir = 'Samples_CSV/'
 sampleWAVDir = 'Samples_WAV'
 exportDir = 'New_Songs/'
-startSample = 'Samples_WAV/60generatorTwo.wav'
-startSampleName = '60generatorTwo.wav'
+startSample = 'Samples_WAV/118generatorTwo.wav'
+startSampleName = '118generatorTwo.wav'
 songLength = 5
 
 
@@ -33,6 +33,52 @@ startS, _ = AudioUtil.loadWaveform(startSample)
 startS = startS.astype(np.float32)
 len(startS)
 
+#%%
+sample1 = 'Samples_WAV/118generatorOne.wav'
+sample2 = 'Samples_WAV/4generatorTwo.wav'
+sample3 = 'Samples_WAV/112generatorOne.wav'
+sample4 = 'Samples_WAV/20generatorOne.wav'
+
+one, _ = AudioUtil.loadWaveform(sample1)
+two, _ = AudioUtil.loadWaveform(sample2)
+three, _ = AudioUtil.loadWaveform(sample3)
+four, _ = AudioUtil.loadWaveform(sample4)
+
+type(one[1])
+
+#%%
+sampletest = np.concatenate((one, four,))[44099:88199]
+sampletest2 = np.concatenate((two, three))[44099:88199]
+sampletest3 = np.concatenate((three, three))[44099:88199]
+sampletest4 = np.concatenate((one, four))[44099:88199]
+
+len(sampletest3)
+#%%
+sampletest = np.reshape(sampletest, (1, -1))
+sampletest2 = np.reshape(sampletest2, (1, -1))
+sampletest3 = np.reshape(sampletest3, (1, -1))
+sampletest4 = np.reshape(sampletest4, (1, -1))
+
+pred1 = model.predict_on_batch(sampletest)
+pred2 = model.predict_on_batch(sampletest2)
+pred3 = model.predict_on_batch(sampletest3)
+pred4 = model.predict_on_batch(sampletest4)
+
+#%%
+print(pred1)
+print(pred2)
+print(pred3)
+print(pred4)
+
+#%%
+del(sampletest)
+del(sampletest2)
+del(sampletest3)
+del(sampletest4)
+
+
+#%%
+sampletest3.shape
 
 #%%
 # FROM WAV! 
@@ -70,6 +116,7 @@ for x in range(songLength):
     pred_samples = []
     for row in df_test.itertuples():
         temp = np.concatenate((currentSample, row.waveform))
+        #temp = np.concatenate((row.waveform,currentSample))
         pred_samples.append(temp)
 
     df_pred_samples = pd.DataFrame({'pred_sample':pred_samples})
