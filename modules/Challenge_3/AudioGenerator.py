@@ -10,13 +10,15 @@ from pathlib import Path
 
 #%%
 #modelPath = 'Trained_Model/SL_CRNN_prototyp_1'
-modelPath = 'Trained_Model/YS03_cRNN_prototyp_train_all_1'
+#modelPath = 'Trained_Model/YS03_cRNN_prototyp_train_all_1'
+#modelPath = 'Trained_Model/YS04_cRNN_prototyp_train_all_1'
+modelPath = 'Trained_Model/SL_cRNN_prototyp_train_all_3'
 sampleCSVDir = 'Samples_CSV/'
 sampleWAVDir = 'Samples_WAV'
 exportDir = 'New_Songs/'
-startSample = 'Samples_WAV/118generatorTwo.wav'
-startSampleName = '118generatorTwo.wav'
-songLength = 5
+startSample = 'Samples_WAV/80generatorOne.wav'
+startSampleName = '80generatorOne.wav'
+songLength = 10
 
 
 #######################################################
@@ -34,7 +36,7 @@ startS = startS.astype(np.float32)
 len(startS)
 
 #%%
-sample1 = 'Samples_WAV/118generatorOne.wav'
+sample1 = 'Samples_WAV/80generatorTwo.wav'
 sample2 = 'Samples_WAV/4generatorTwo.wav'
 sample3 = 'Samples_WAV/112generatorOne.wav'
 sample4 = 'Samples_WAV/20generatorOne.wav'
@@ -47,12 +49,28 @@ four, _ = AudioUtil.loadWaveform(sample4)
 type(one[1])
 
 #%%
-sampletest = np.concatenate((one, four,))[44099:88199]
-sampletest2 = np.concatenate((two, three))[44099:88199]
-sampletest3 = np.concatenate((three, three))[44099:88199]
-sampletest4 = np.concatenate((one, four))[44099:88199]
+# sampletest = np.concatenate((one, two))[44099:88199]
+# sampletest2 = np.concatenate((two, two))[44099:88199]
+# sampletest3 = np.concatenate((three, two))[44099:88199]
+# sampletest4 = np.concatenate((one, two))[44099:88199]
 
-len(sampletest3)
+sampletest = one + two
+sampletest2 = two + two
+sampletest3 = three + two
+sampletest4 = four + two
+
+sampletest.shape
+
+#%%
+sampletest = sampletest[44099:88199]
+sampletest2 = sampletest2[44099:88199]
+sampletest3 = sampletest3[44099:88199]
+sampletest4 = sampletest4[44099:88199]
+
+#%%
+sampletest4.shape
+
+
 #%%
 sampletest = np.reshape(sampletest, (1, -1))
 sampletest2 = np.reshape(sampletest2, (1, -1))
@@ -101,7 +119,7 @@ df_samples
 #create sample pairs for prediction
 #predict for all pairs
 #set next sample into export song and change current sample
-
+np. set_printoptions(threshold=np. inf)
 currentSample = startS
 new_song = []
 new_song.append(startSampleName)
@@ -128,7 +146,8 @@ for x in range(songLength):
     #df_test = df_test.join(df_pred_samples)
     df_pred_samples['pred_sample'] = df_pred_samples['pred_sample'].apply(lambda x: x[44099:88199])
     pred = np.stack(df_pred_samples['pred_sample'].values).astype(np.float32)        
-    df_test['prediction'] = model.predict(pred)
+    #df_test['prediction'] = model.predict(pred).astype(np.float32)
+    break
 
     #select highest prediction
     #atm many 1 predictions -> workaroung = select first index
@@ -159,7 +178,15 @@ for x in range(songLength):
     del(df_test)
     print(str(new_song))
 
+model.predict(pred).astype(np.float32)
 
+#%%
+
+out = model.predict(pred).astype(np.float32)
+out.max()
+
+#%%
+out.min()
 
 #%%
 #load filepaths and search for sample name -> if file.stem == sampleName
@@ -178,7 +205,7 @@ exportPaths
 #%%
 #export to new song
 print("Exporting new Song!")
-name = 'zweiterSong21062022.wav'
+name = 'sechsterSong21062022.wav'
 
 AudioUtil.buildTrack(exportPaths, exportDir, name)
 
