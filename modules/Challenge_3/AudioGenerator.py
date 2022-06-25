@@ -9,7 +9,7 @@ import AudioUtil
 from pathlib import Path
 
 #%%
-#modelPath = 'Trained_Model/SL_CRNN_prototyp_1'
+#modelPath = 'Trained_Model/model_crnn.h5'
 #modelPath = 'Trained_Model/YS03_cRNN_prototyp_train_all_1'
 #modelPath = 'Trained_Model/YS04_cRNN_prototyp_train_all_1'
 modelPath = 'Trained_Model/SL_cRNN_prototyp_train_all_3'
@@ -18,7 +18,7 @@ sampleWAVDir = 'Samples_WAV'
 exportDir = 'New_Songs/'
 startSample = 'Samples_WAV/80generatorOne.wav'
 startSampleName = '80generatorOne.wav'
-songLength = 10
+songLength = 5
 
 
 #######################################################
@@ -27,7 +27,8 @@ songLength = 10
 
 #%%
 #load model
-model = tf.keras.models.load_model(modelPath)
+#model = tf.keras.models.load_model(modelPath)
+model = tf.saved_model.load(modelPath)
 model.summary()
 
 #load start sample
