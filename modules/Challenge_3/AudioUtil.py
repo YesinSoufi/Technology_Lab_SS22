@@ -2,7 +2,6 @@
 from pydub import AudioSegment
 import pandas as pd
 import numpy as np
-import pandas as pd
 import os
 from glob import glob
 import IPython.display as ipd
