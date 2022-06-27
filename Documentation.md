@@ -76,6 +76,9 @@ tanH: Die TanH-Aktivierungsfunktion liefert als Rückgabewert eine reelle Zahl z
 
 
 <h2>Challenge 2</h2> 
+Unter modules Challenge1 sind alle benötigten Python Dateien um Samples zu erzeugen
+ * [CreateSamples](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/CreateSamples.md)
+
 <h3>Ansatz Dense Network</h3> 
 <h4>Vorgehensweise</h4> 
 Für Challenge 2 wurde ein Klassifikations-Ansatz gewählt. Hierzu wurde ein Dense Network genutzt. Im ersten Schritt wurden Label Parameter gesetzt. Für die Klassifikation wurden 2 csv-Dateien verwendet (train_file und val_file). Im Trainingsdatensatz wurden die Samples mit einer nach der Reihenfolge gesetzten ID des Songs gelabelt. Anschließend wurde ein neuer Song genommen, der nicht im Trainingsdatensatz enthalten war und  in 8-Sekunden Stücke geschnitten, mit dem Ziel für jedes Sample das zugehörige Label zu prognostizieren. Im Letzten Schritt wurden die Samples nach den prognostizierten Samples sortiert und exportiert.
@@ -83,6 +86,9 @@ Für Challenge 2 wurde ein Klassifikations-Ansatz gewählt. Hierzu wurde ein Den
 Mit Hilfe  des Dense Networks wurde ein Ergebnis aus Samples generiert. Der generierte Song war hörbar. Jedoch ist dies aufgrund des fehlenden Erinnerungsvermögens aus Zufallsergebnis zu verzeichnen, Die Länge von 8 Sekunden der einzelnen Samples und die daraus resultierende niedrige Anzahl an Cuts begünstigt zudem ein gutes Ergebnis. Als Key Learning aus Challenge 2 wurde deshalb die Notwendigkeit eines Neuronales Netzes, welches Erinnerungsvermögen besitzt, identifiziert. Der Prozess muss durch Machine Learning funktionieren und nicht durch eigens entwickelte Algorithmen und Methodiken. Außerdem wurde uns bewusst, dass ein tieferes Verständnis für neuronale Netze unumgänglich ist und in Vorbereitung auf Challenge 3 aufgebaut werden muss. 
 
 <h2>Challenge 3</h2> 
+Unter modules Challenge2 sind alle benötigten Python Dateien um ein rekonstruierten Song zu erzeugen 
+* [Prototyp](https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Music_Resampler.pdf)
+
 <h3>Ansatz 1 Encoder/Decoder</h3> 
 Die Grundidee dieses Ansatzes besteht darin ein Neuronales Netz unsupervised mit Samples zu trainieren, sodass es sich dabei aussagekräftige Features aneignet. Via Autoencoder wird unsupervised Learning durchgeführt, um Features zu extrahieren. Dabei dient der Decoder nur der Evaluation, um die Qualität unserer extrahierten Features zu prüfen. Danach wird die Similarity zu den vorherigen Samples bestimmt. Die Idee dabei ist, dass die letzten X (z.B. 3) Samples betrachtet werden, um den bisherigen Songverlauf miteinzubeziehen.
 <h4>Fazit</h4> 
