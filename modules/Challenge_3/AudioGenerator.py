@@ -9,95 +9,24 @@ import AudioUtil
 from pathlib import Path
 
 #%%
-#modelPath = 'Trained_Model/model_crnn.h5'
-#modelPath = 'Trained_Model/YS03_cRNN_prototyp_train_all_1'
-#modelPath = 'Trained_Model/YS04_cRNN_prototyp_train_all_1'
-modelPath = 'Trained_Model/SL_cRNN_prototyp_train_all_3'
+modelPath = 'Trained_Model/crnn_model_final.h5'
 sampleCSVDir = 'Samples_CSV/'
 sampleWAVDir = 'Samples_WAV'
 exportDir = 'New_Songs/'
-startSample = 'Samples_WAV/80generatorOne.wav'
-startSampleName = '80generatorOne.wav'
+startSample = 'Samples_WAV/30generatorOne.wav'
+startSampleName = '30generatorOne.wav'
 songLength = 5
-
-
-#######################################################
-#   Change df_test to df_samples after completion!!!
-#######################################################
 
 #%%
 #load model
-#model = tf.keras.models.load_model(modelPath)
-model = tf.saved_model.load(modelPath)
+model = tf.keras.models.load_model(modelPath)
+#model = tf.saved_model.load(modelPath)
 model.summary()
 
 #load start sample
 startS, _ = AudioUtil.loadWaveform(startSample)
 startS = startS.astype(np.float32)
 len(startS)
-
-#%%
-sample1 = 'Samples_WAV/80generatorTwo.wav'
-sample2 = 'Samples_WAV/4generatorTwo.wav'
-sample3 = 'Samples_WAV/112generatorOne.wav'
-sample4 = 'Samples_WAV/20generatorOne.wav'
-
-one, _ = AudioUtil.loadWaveform(sample1)
-two, _ = AudioUtil.loadWaveform(sample2)
-three, _ = AudioUtil.loadWaveform(sample3)
-four, _ = AudioUtil.loadWaveform(sample4)
-
-type(one[1])
-
-#%%
-# sampletest = np.concatenate((one, two))[44099:88199]
-# sampletest2 = np.concatenate((two, two))[44099:88199]
-# sampletest3 = np.concatenate((three, two))[44099:88199]
-# sampletest4 = np.concatenate((one, two))[44099:88199]
-
-sampletest = one + two
-sampletest2 = two + two
-sampletest3 = three + two
-sampletest4 = four + two
-
-sampletest.shape
-
-#%%
-sampletest = sampletest[44099:88199]
-sampletest2 = sampletest2[44099:88199]
-sampletest3 = sampletest3[44099:88199]
-sampletest4 = sampletest4[44099:88199]
-
-#%%
-sampletest4.shape
-
-
-#%%
-sampletest = np.reshape(sampletest, (1, -1))
-sampletest2 = np.reshape(sampletest2, (1, -1))
-sampletest3 = np.reshape(sampletest3, (1, -1))
-sampletest4 = np.reshape(sampletest4, (1, -1))
-
-pred1 = model.predict_on_batch(sampletest)
-pred2 = model.predict_on_batch(sampletest2)
-pred3 = model.predict_on_batch(sampletest3)
-pred4 = model.predict_on_batch(sampletest4)
-
-#%%
-print(pred1)
-print(pred2)
-print(pred3)
-print(pred4)
-
-#%%
-del(sampletest)
-del(sampletest2)
-del(sampletest3)
-del(sampletest4)
-
-
-#%%
-sampletest3.shape
 
 #%%
 # FROM WAV! 
@@ -148,17 +77,11 @@ for x in range(songLength):
     df_pred_samples['pred_sample'] = df_pred_samples['pred_sample'].apply(lambda x: x[44099:88199])
     pred = np.stack(df_pred_samples['pred_sample'].values).astype(np.float32)        
     #df_test['prediction'] = model.predict(pred).astype(np.float32)
-    break
 
     #select highest prediction
-    #atm many 1 predictions -> workaroung = select first index
-    #check for duplicate? -> will this start a loop with two samples?
-    #output = df_test[df_test.prediction == df_test.prediction.max()]
     output = df_test.sort_values(by='prediction', ascending=False)
     print(output[['name', 'prediction']])
-    #set new current sample
-    #set sample into new song
-    #atm sample name will be saved into list
+
 
 
     output.reset_index(inplace=True, drop=True)
@@ -171,23 +94,13 @@ for x in range(songLength):
             used_samples.append(output.iloc[row.Index,0])
             count = count + 1
             break
-    
-    #del(df_test)
+
     if len(used_samples) == len(df_test['name']):
         used_samples = []
     del(df_pred_samples)
     del(df_test)
     print(str(new_song))
 
-model.predict(pred).astype(np.float32)
-
-#%%
-
-out = model.predict(pred).astype(np.float32)
-out.max()
-
-#%%
-out.min()
 
 #%%
 #load filepaths and search for sample name -> if file.stem == sampleName
