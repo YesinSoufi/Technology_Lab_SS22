@@ -1,6 +1,7 @@
+#%%
 from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Flatten, LSTM
+from keras.models import Sequential
+from keras.layers import Conv1D, MaxPooling1D, Dense,Dropout,Flatten, LSTM
 
 #%%
 def cRNN_Prototyp():
@@ -52,7 +53,7 @@ df_nonMatching = pd.read_csv(nonMatchingSamples, usecols=['training_waveform', '
 df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(literal_eval)
 #df_nonMatching['training_waveform'] = df_nonMatching['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
-df_training_data = pd.concat([df_matching,df_nonMatching, df_matching2], axis=0, sort=False)
+df_training_data = pd.concat([df_matching,df_nonMatching, df_matching2,df_matching,df_nonMatching, df_matching2], axis=0, sort=False)
 df_training_data.reset_index(inplace=True, drop=True)
 #df_training_data['training_waveform'] = df_training_data['training_waveform'].apply(lambda x: x/np.abs(x).max())
 
@@ -77,7 +78,7 @@ model.summary()
 #train and save model
 batch = 5
 epoch = 10
-model_name = 'SL_cRNN_prototyp_CNN_Layers_2'
+model_name = 'OK_cRNN_prototyp_CNN_Layers_2'
 
 model.fit(X_train, y_train, batch, epochs=epoch,
                       validation_split=0.2)
