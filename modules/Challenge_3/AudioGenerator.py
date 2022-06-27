@@ -50,7 +50,7 @@ df_samples
 #create sample pairs for prediction
 #predict for all pairs
 #set next sample into export song and change current sample
-np. set_printoptions(threshold=np. inf)
+#np.set_printoptions(threshold=np. inf)
 currentSample = startS
 new_song = []
 new_song.append(startSampleName)
