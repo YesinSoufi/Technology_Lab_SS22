@@ -2,7 +2,6 @@
 from pydub import AudioSegment
 import pandas as pd
 import numpy as np
-import pandas as pd
 import os
 from glob import glob
 import IPython.display as ipd
@@ -59,17 +58,18 @@ def loadWaveform(filePath):
     extracted_sampleRate = []
     length = librosa.get_duration(filename=filePath)
     data, sr = librosa.load(filePath, mono=True)
+    data = librosa.util.normalize(data)
     #extracted_waveForm.append(data)
     #extracted_sampleRate.append(sr)
 
     #return extracted_waveForm, extracted_sampleRate
     return data, sr
 
-def buildTrack(df_samples, savePath, saveName):
+def buildTrack(sampleList, savePath, saveName):
     combined = AudioSegment.empty()
-    for row in df_samples.iterrows():
-        file_path = row[1].filePath
-        file_path = file_path.replace('sasch', 'Sascha')
+    for path in sampleList:
+        file_path = path
+        #file_path = file_path.replace('sasch', 'Sascha')
         temp = AudioSegment.from_file(file_path, format="wav")
         combined = combined + temp
     
@@ -124,3 +124,5 @@ def sort_Dataframe(df_dataSet):
     df_sorted = df_sorted.drop('index', 1)
 
     return df_sorted
+
+# %%
