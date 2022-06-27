@@ -132,17 +132,18 @@ Zur Umsetzung dieses Ansatzes werden vier verschiedene Layer-Arten verwendet:
     * Klassifiziert LSTM-Output
     * Output von 0 bis 1
 
-
+<br><br><img src="https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/CrnnModel.png" alt="CRNN Model"><br><br>
 <h4>Trainingsdaten</h4> 
 
 Zum Erzeugen von Trainingsdaten wurden Songs in Samples zerschnitten, wobei jedes Sample eine Länge von 3 Sekunden hat. Zwei aufeinander folgende Samples werden als passend gelabeled. Außerdem wurden extra Samples mit Extremfällen integriert.
 Im Unterschied zu Challenge 2 soll nun verhindert werden, dass die Input-Songs wieder zusammengeführt werden. 
-
+<br><br><img src="https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/CreateTrainingData.png" alt="Erzeugen der Trainingsdaten"><br><br>
 <h4>Training & Evaluation</h4> 
 
 Für ein gutes Ergebnis ist die Anzahl der Epochen von zentraler Bedeutung, zu wenig Epochen verhindern einen guten Lerneffekt. Bei zu vielen Epochen verliert das Modell die Generalisierung-
 kapazität durch Überanpassung. Zum Training des Modells wurden 75 Epochen gewählt.
-
+<br><br><img src="https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Training.png" alt="Training"><br><br>
+<br><br><img src="https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Evaluation.png" alt="Evaluation"><br><br>
 <h4>Zusammensetzung der Tracks</h4>
 Zur Zusammensetzung der Tracks wird zunächst ein Startsample festgelegt. Daraufhin werden Samples geladen, die potentiell auf das Startsample folgen könnten. Im Anschluss beginnt ein iterativer Prozess: Das Startsample wird mit verfügbaren Samples gematcht, dann bestimmt das Modell für jedes Samplepaar einen Score. Zuletzt wird das Sample mit dem besten Wert an das vorherige Sample angehängt und wird anschließend zum Startsample. Daraufhin beginnt der Prozess mehrmalig von Neuem, bis letztendlich der Export stattfindet. 
 <br><br><img src="https://github.com/YesinSoufi/Technology_Lab_SS22/blob/main/assets/Resampling.png" alt="Resampling"><br>
